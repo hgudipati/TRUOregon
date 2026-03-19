@@ -1755,37 +1755,5 @@
   </ul>
 </footer>
 
-<script>
-  // Intersection observer for fade-up
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-  // Click to toggle flip on touch devices
-  document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', () => card.classList.toggle('flipped'));
-  });
-
-  // Filter logic
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.flip-card').forEach(card => {
-        if (filter === 'all') {
-          card.style.display = '';
-        } else {
-          const loc  = card.dataset.location || '';
-          const type = card.dataset.type || '';
-          const show = loc.includes(filter) || type.includes(filter);
-          card.style.display = show ? '' : 'none';
-        }
-      });
-    });
-  });
-</script>
 </body>
 </html>
