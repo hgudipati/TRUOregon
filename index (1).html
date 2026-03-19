@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rogue to River — Ashland ↔ Portland Climate Corridor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ash:       #2b2824;
+      --smoke:     #4a4540;
+      --bark:      #6b5c4e;
+      --clay:      #a07855;
+      --sage:      #7a8c6e;
+      --fern:      #4d6b52;
+      --river:     #3d6b7a;
+      --sky:       #7aaabb;
+      --cream:     #f2ede6;
+      --parchment: #e8e0d4;
+      --ember:     #c4622d;
+      --gold:      #c99a3e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ash);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(242,237,230,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(107,92,78,0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      color: var(--ash);
+      text-decoration: none;
+    }
+    .nav-logo .arrow { color: var(--ember); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ember); }
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--ember);
+      color: #fff;
+      border: none;
+      padding: 0.55rem 1.3rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--clay); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fern);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--fern);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--ash);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title em { font-style: italic; color: var(--ember); }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--smoke);
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--ash);
+      color: var(--cream);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--ash);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-primary:hover { background: var(--ember); border-color: var(--ember); }
+    .btn-outline {
+      background: transparent;
+      color: var(--ash);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--ash);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--ash); color: var(--cream); }
+    .hero-right {
+      position: relative;
+      background: var(--ash);
+      overflow: hidden;
+    }
+    .hero-map { position: absolute; inset: 0; }
+    .landscape-svg { width: 100%; height: 100%; }
+    .corridor-label {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2rem;
+      right: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(242,237,230,0.45);
+      border-top: 1px solid rgba(242,237,230,0.12);
+      padding-top: 1rem;
+    }
+
+    /* TICKER */
+    .ticker-wrap {
+      background: var(--fern);
+      color: var(--cream);
+      padding: 0.75rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 32s linear infinite;
+    }
+    .ticker-item {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0 3rem;
+    }
+    .ticker-item::after { content: '◆'; margin-left: 3rem; opacity: 0.4; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* PREMISE */
+    .premise { display: grid; grid-template-columns: 1fr 2fr; border-bottom: 1px solid var(--parchment); }
+    .premise-sidebar {
+      background: var(--ash);
+      color: var(--cream);
+      padding: 5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .premise-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1.5rem;
+    }
+    .premise-sidebar h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .premise-sidebar h2 em { font-style: italic; color: var(--gold); }
+    .premise-sidebar p { font-size: 0.9rem; color: rgba(242,237,230,0.7); line-height: 1.8; }
+    .premise-main { padding: 5rem; display: flex; flex-direction: column; justify-content: center; }
+    .premise-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--ash);
+      border-left: 4px solid var(--ember);
+      padding-left: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .premise-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .premise-body p { color: var(--smoke); font-size: 0.95rem; }
+
+    /* ISSUES */
+    .issues-section { padding: 6rem 5rem; background: var(--parchment); }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--bark);
+      padding-bottom: 1rem;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+    }
+    .section-header a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ember);
+      text-decoration: none;
+    }
+    .issues-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--bark);
+    }
+    .issue-card {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--bark);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: background 0.25s;
+    }
+    .issue-card:last-child { border-right: none; }
+    .issue-card:hover { background: var(--ash); }
+    .issue-card:hover .issue-name,
+    .issue-card:hover .issue-desc { color: var(--cream); }
+    .issue-card:hover .issue-accent { background: var(--ember); }
+    .issue-accent {
+      width: 2.5rem; height: 3px;
+      background: var(--clay);
+      margin-bottom: 1.2rem;
+      transition: background 0.25s;
+    }
+    .issue-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+    .issue-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ash);
+      margin-bottom: 0.5rem;
+      transition: color 0.25s;
+    }
+    .issue-desc { font-size: 0.8rem; color: var(--smoke); line-height: 1.6; transition: color 0.25s; }
+
+    /* PROJECTS */
+    .projects-section { padding: 6rem 5rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .project-card {
+      background: var(--parchment);
+      border: 1px solid rgba(107,92,78,0.25);
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(43,40,36,0.1); }
+    .project-tag-row { display: flex; gap: 0.5rem; padding: 1.2rem 1.5rem 0; }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+    }
+    .tag-water  { background: #ddeef3; color: var(--river); }
+    .tag-fire   { background: #f5e2d6; color: var(--ember); }
+    .tag-climate{ background: #dde8dd; color: var(--fern); }
+    .tag-hazard { background: #f0e8d0; color: var(--clay); }
+    .project-body { padding: 1rem 1.5rem 1.5rem; flex: 1; }
+    .project-city {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 0.5rem;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ash);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .project-desc { font-size: 0.85rem; color: var(--smoke); line-height: 1.7; }
+    .project-footer {
+      border-top: 1px solid rgba(107,92,78,0.2);
+      padding: 0.9rem 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .learn-arrow { color: var(--ember); }
+
+    /* SUBMIT */
+    .submit-section {
+      background: var(--ash);
+      color: var(--cream);
+      padding: 6rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .submit-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    .submit-left h2 em { font-style: italic; color: var(--gold); }
+    .submit-left p { font-size: 0.95rem; color: rgba(242,237,230,0.75); margin-bottom: 2rem; line-height: 1.8; }
+    .submit-steps { list-style: none; margin-bottom: 2.5rem; }
+    .submit-steps li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(242,237,230,0.1);
+      font-size: 0.88rem;
+      color: rgba(242,237,230,0.8);
+    }
+    .step-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gold);
+      background: rgba(201,154,62,0.15);
+      padding: 0.2rem 0.5rem;
+      min-width: 2rem;
+      text-align: center;
+      margin-top: 0.15rem;
+    }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--ash);
+      padding: 1rem 2.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-gold:hover { background: var(--clay); color: var(--cream); }
+    .submit-right {
+      background: rgba(242,237,230,0.05);
+      border: 1px solid rgba(242,237,230,0.12);
+      padding: 2.5rem;
+    }
+    .submit-right h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1.5rem; }
+    .categories { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .cat-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(242,237,230,0.25);
+      color: rgba(242,237,230,0.7);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cat-badge:hover, .cat-badge.active { border-color: var(--gold); color: var(--gold); background: rgba(201,154,62,0.08); }
+    .data-note {
+      font-size: 0.78rem;
+      color: rgba(242,237,230,0.4);
+      line-height: 1.7;
+      border-top: 1px solid rgba(242,237,230,0.1);
+      padding-top: 1.2rem;
+      font-style: italic;
+    }
+
+    /* MAP BAND */
+    .map-band {
+      background: var(--fern);
+      padding: 3rem 5rem;
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+    }
+    .map-band-text { color: var(--cream); flex: 1; }
+    .map-band-text h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .map-band-text p { font-size: 0.88rem; opacity: 0.8; max-width: 380px; }
+    .map-band-stat { text-align: center; color: var(--cream); }
+    .map-band-stat .big {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--gold);
+    }
+    .map-band-stat .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-top: 0.3rem;
+    }
+    .map-divider { width: 1px; height: 5rem; background: rgba(242,237,230,0.2); }
+
+    /* VOICES */
+    .voices-section { padding: 6rem 5rem; }
+    .voices-intro { max-width: 600px; color: var(--smoke); margin-bottom: 3rem; }
+    .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .voice-card { border-top: 3px solid var(--ember); padding-top: 1.5rem; }
+    .voice-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--ash);
+      margin-bottom: 1.2rem;
+    }
+    .voice-quote::before { content: '\201C'; color: var(--ember); }
+    .voice-quote::after  { content: '\201D'; color: var(--ember); }
+    .voice-attr {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: var(--parchment);
+      border-top: 4px solid var(--sage);
+      padding: 4rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .newsletter-text h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .newsletter-text p { font-size: 0.88rem; color: var(--smoke); }
+    .newsletter-form { display: flex; flex: 1; max-width: 480px; }
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.9rem 1.2rem;
+      border: 2px solid var(--bark);
+      border-right: none;
+      background: var(--cream);
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9rem;
+      color: var(--ash);
+      outline: none;
+    }
+    .newsletter-form input:focus { border-color: var(--fern); }
+    .newsletter-form button {
+      background: var(--fern);
+      color: var(--cream);
+      border: 2px solid var(--fern);
+      padding: 0.9rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--ash); border-color: var(--ash); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ash);
+      color: rgba(242,237,230,0.6);
+      padding: 3.5rem 5rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--cream); margin-bottom: 0.8rem; }
+    .footer-tagline { font-size: 0.82rem; line-height: 1.7; max-width: 260px; }
+    .footer-col h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.5rem; }
+    .footer-col a { font-size: 0.83rem; color: rgba(242,237,230,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      background: var(--ash);
+      border-top: 1px solid rgba(242,237,230,0.08);
+      padding: 1.2rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(242,237,230,0.28);
+    }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-delay-1 { transition-delay: 0.12s; }
+    .fade-up-delay-2 { transition-delay: 0.24s; }
+    .fade-up-delay-3 { transition-delay: 0.36s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 3rem 2rem; }
+      .premise { grid-template-columns: 1fr; }
+      .premise-main { padding: 3rem 2rem; }
+      .premise-body { grid-template-columns: 1fr; }
+      .issues-grid { grid-template-columns: repeat(2, 1fr); }
+      .issue-card { border-bottom: 1px solid var(--bark); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .submit-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 2rem; }
+      .map-band { flex-wrap: wrap; padding: 3rem 2rem; gap: 2rem; }
+      .voices-grid { grid-template-columns: 1fr; }
+      .newsletter { flex-direction: column; padding: 3rem 2rem; }
+      .newsletter-form { max-width: 100%; width: 100%; }
+      footer { grid-template-columns: 1fr 1fr; padding: 3rem 2rem; }
+      .issues-section, .projects-section, .voices-section { padding: 4rem 2rem; }
+      .footer-bottom { padding: 1rem 2rem; flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Rogue <span class="arrow">↔</span> River</a>
+  <ul class="nav-links">
+    <li><a href="#issues">Issues</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#voices">Voices</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Events</a></li>
+  </ul>
+  <a class="nav-cta" href="#submit">Submit a Project</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-up">An Observatory for Oregon's Climate Future</div>
+    <h1 class="hero-title fade-up fade-up-delay-1">
+      Ashland is Portland<br /><em>in 20 years.</em>
+    </h1>
+    <p class="hero-subtitle fade-up fade-up-delay-2">
+      What happens at the edge of Oregon's climate frontier matters to all of us.
+      Rogue to River connects rural Ashland's hard-won lessons with Portland's future —
+      amplifying community voices, mapping shared hazards, and building resilience across 280 miles of corridor.
+    </p>
+    <div class="hero-buttons fade-up fade-up-delay-3">
+      <a class="btn-primary" href="#projects">Explore Projects</a>
+      <a class="btn-outline" href="#issues">Browse Issues</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-map">
+      <svg class="landscape-svg" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0e0c0a"/>
+            <stop offset="60%" stop-color="#2b2824"/>
+            <stop offset="100%" stop-color="#3d3530"/>
+          </linearGradient>
+          <linearGradient id="smkGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c4622d" stop-opacity="0.0"/>
+            <stop offset="45%" stop-color="#c4622d" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#a07855" stop-opacity="0.04"/>
+          </linearGradient>
+        </defs>
+        <rect width="600" height="700" fill="url(#skyGrad)"/>
+        <!-- Stars -->
+        <g fill="rgba(242,237,230,0.65)">
+          <circle cx="48" cy="40" r="0.8"/><circle cx="122" cy="24" r="1.1"/><circle cx="195" cy="58" r="0.7"/>
+          <circle cx="308" cy="19" r="1.2"/><circle cx="398" cy="44" r="0.9"/><circle cx="508" cy="30" r="0.8"/>
+          <circle cx="552" cy="68" r="1.0"/><circle cx="80" cy="90" r="0.7"/><circle cx="168" cy="77" r="0.9"/>
+          <circle cx="262" cy="42" r="0.7"/><circle cx="372" cy="72" r="1.0"/><circle cx="448" cy="56" r="0.8"/>
+          <circle cx="488" cy="92" r="0.7"/><circle cx="32" cy="122" r="0.8"/><circle cx="150" cy="110" r="1.0"/>
+          <circle cx="338" cy="97" r="0.7"/><circle cx="518" cy="114" r="0.9"/><circle cx="70" cy="145" r="0.7"/>
+          <circle cx="280" cy="130" r="0.8"/><circle cx="430" cy="108" r="0.7"/>
+        </g>
+        <!-- Smoke atmosphere -->
+        <ellipse cx="300" cy="210" rx="330" ry="190" fill="url(#smkGrad)"/>
+        <!-- Distant Cascades -->
+        <path d="M0 370 L0 255 L45 218 L85 258 L115 195 L148 258 L185 228 L222 178 L265 238 L295 188 L332 228 L362 198 L402 258 L442 218 L485 258 L525 228 L562 268 L600 238 L600 370 Z" fill="#1a1815" opacity="0.95"/>
+        <!-- Mid ridgeline -->
+        <path d="M0 420 L0 308 L62 278 L105 308 L142 268 L182 308 L235 282 L282 258 L325 292 L372 268 L422 292 L475 272 L535 292 L600 268 L600 420 Z" fill="#201e1c" opacity="1"/>
+        <!-- Corridor path (I-5/99W feel) -->
+        <path d="M135 582 C 162 552 195 512 225 472 C 258 428 283 386 302 340 C 322 294 342 255 368 215 C 390 180 415 152 442 132" fill="none" stroke="rgba(201,154,62,0.55)" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <!-- Ashland -->
+        <circle cx="135" cy="583" r="6" fill="#c4622d" opacity="0.85"/>
+        <circle cx="135" cy="583" r="12" fill="#c4622d" opacity="0.18"/>
+        <text x="154" y="588" font-family="monospace" font-size="8.5" fill="rgba(242,237,230,0.72)" letter-spacing="1.5">ASHLAND</text>
+        <!-- Portland -->
+        <circle cx="442" cy="132" r="6" fill="#7aaabb" opacity="0.85"/>
+        <circle cx="442" cy="132" r="12" fill="#7aaabb" opacity="0.18"/>
+        <text x="458" y="137" font-family="monospace" font-size="8.5" fill="rgba(242,237,230,0.72)" letter-spacing="1.5">PORTLAND</text>
+        <!-- Medford midpoint dot -->
+        <circle cx="270" cy="368" r="3" fill="rgba(201,154,62,0.5)"/>
+        <!-- River lines -->
+        <path d="M0 502 C 100 492 200 512 300 498 C 400 484 500 500 600 490" fill="none" stroke="rgba(61,107,122,0.45)" stroke-width="2.5"/>
+        <path d="M0 510 C 110 500 212 518 312 504 C 412 490 512 506 600 498" fill="none" stroke="rgba(61,107,122,0.25)" stroke-width="1.5"/>
+        <!-- Foreground silhouette -->
+        <path d="M0 700 L0 558 C 85 543 165 554 245 547 C 325 540 385 554 462 544 C 522 537 562 546 600 540 L600 700 Z" fill="#141210"/>
+        <!-- Ember glow near Ashland -->
+        <ellipse cx="105" cy="548" rx="68" ry="28" fill="rgba(196,98,45,0.1)"/>
+        <!-- Distance label -->
+        <rect x="195" y="336" width="135" height="36" fill="rgba(35,32,28,0.78)"/>
+        <text x="262" y="350" font-family="monospace" font-size="7" fill="rgba(201,154,62,0.85)" letter-spacing="2" text-anchor="middle">280 MILES</text>
+        <text x="262" y="363" font-family="monospace" font-size="7" fill="rgba(242,237,230,0.45)" letter-spacing="1" text-anchor="middle">ASHLAND → PORTLAND</text>
+      </svg>
+    </div>
+    <div class="corridor-label">
+      Rogue to River Climate Corridor &nbsp;·&nbsp; Southern Oregon to the Willamette Valley
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Water Scarcity</span>
+    <span class="ticker-item">Wildfire Smoke</span>
+    <span class="ticker-item">Compounding Hazards</span>
+    <span class="ticker-item">Drought &amp; Heat</span>
+    <span class="ticker-item">Equity &amp; Access</span>
+    <span class="ticker-item">Rural Resilience</span>
+    <span class="ticker-item">Ashland ↔ Portland</span>
+    <span class="ticker-item">Climate Adaptation</span>
+    <span class="ticker-item">Community Science</span>
+    <span class="ticker-item">Water Scarcity</span>
+    <span class="ticker-item">Wildfire Smoke</span>
+    <span class="ticker-item">Compounding Hazards</span>
+    <span class="ticker-item">Drought &amp; Heat</span>
+    <span class="ticker-item">Equity &amp; Access</span>
+    <span class="ticker-item">Rural Resilience</span>
+    <span class="ticker-item">Ashland ↔ Portland</span>
+    <span class="ticker-item">Climate Adaptation</span>
+    <span class="ticker-item">Community Science</span>
+  </div>
+</div>
+
+<!-- PREMISE -->
+<section class="premise">
+  <div class="premise-sidebar fade-up">
+    <div class="premise-tag">Our Premise</div>
+    <h2>Rural voices carry<br /><em>early warnings</em></h2>
+    <p>Ashland's residents have lived through what Portland is beginning to face. Their experiences are data. Their adaptations are blueprints. This platform makes those connections visible.</p>
+  </div>
+  <div class="premise-main">
+    <blockquote class="premise-quote fade-up">
+      Climate change doesn't arrive everywhere at once. The communities at the edge see it first — and they deserve to be heard.
+    </blockquote>
+    <div class="premise-body">
+      <p class="fade-up">Ashland sits at the climate frontier: longer fire seasons, declining snowpack, drought-stressed watersheds, and compounding emergencies. These aren't future projections — they're current reality for Rogue Valley residents.</p>
+      <p class="fade-up fade-up-delay-1">Portland is tracking toward similar conditions within two decades. By creating a shared knowledge corridor between these communities, we can compress learning timelines and build more equitable responses to the climate challenges ahead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ISSUES -->
+<section class="issues-section" id="issues">
+  <div class="section-header fade-up">
+    <h2>Issues</h2>
+    <a href="#">View all issues →</a>
+  </div>
+  <div class="issues-grid">
+    <a class="issue-card fade-up" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">💧</span>
+      <div class="issue-name">Water</div>
+      <div class="issue-desc">Snowpack loss, Rogue River flows, drought policy, and watershed equity.</div>
+    </a>
+    <a class="issue-card fade-up fade-up-delay-1" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">🔥</span>
+      <div class="issue-name">Fire</div>
+      <div class="issue-desc">Wildfire risk, smoke health impacts, evacuation planning, and defensible space.</div>
+    </a>
+    <a class="issue-card fade-up fade-up-delay-2" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">⚠️</span>
+      <div class="issue-name">Compounding Hazards</div>
+      <div class="issue-desc">When drought, heat, fire, and flood converge — and systems fail together.</div>
+    </a>
+    <a class="issue-card fade-up fade-up-delay-3" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">🌡️</span>
+      <div class="issue-name">Climate Change</div>
+      <div class="issue-desc">Long-term shifts in temperature, precipitation, and seasonal patterns across the corridor.</div>
+    </a>
+    <a class="issue-card fade-up" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">🤝</span>
+      <div class="issue-name">Equity</div>
+      <div class="issue-desc">Who bears the burden of climate impacts, and who has access to resources and recovery.</div>
+    </a>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-header fade-up">
+    <h2>Featured Projects</h2>
+    <a href="#">All projects →</a>
+  </div>
+  <div class="projects-grid">
+    <a class="project-card fade-up" href="#">
+      <div class="project-tag-row">
+        <span class="tag tag-water">Water</span>
+        <span class="tag tag-climate">Climate</span>
+      </div>
+      <div class="project-body">
+        <div class="project-city">Ashland, OR</div>
+        <div class="project-title">Crowdsourcing Snowpack Memory in Bear Creek Watershed</div>
+        <div class="project-desc">Community volunteers track seasonal snowpack decline using historical photo archives and current measurements — building a 40-year dataset no agency has compiled.</div>
+      </div>
+      <div class="project-footer">
+        <span>Water · Community Science</span>
+        <span class="learn-arrow">→</span>
+      </div>
+    </a>
+    <a class="project-card fade-up fade-up-delay-1" href="#">
+      <div class="project-tag-row">
+        <span class="tag tag-fire">Fire</span>
+        <span class="tag tag-hazard">Compounding</span>
+      </div>
+      <div class="project-body">
+        <div class="project-city">Portland, OR</div>
+        <div class="project-title">Smoke Season Preparedness: What Ashland Figured Out</div>
+        <div class="project-desc">A cross-city policy brief adapting Ashland's air quality response playbook for Portland's denser, more vulnerable neighborhoods.</div>
+      </div>
+      <div class="project-footer">
+        <span>Fire · Policy</span>
+        <span class="learn-arrow">→</span>
+      </div>
+    </a>
+    <a class="project-card fade-up fade-up-delay-2" href="#">
+      <div class="project-tag-row">
+        <span class="tag tag-climate">Climate</span>
+        <span class="tag tag-hazard">Equity</span>
+      </div>
+      <div class="project-body">
+        <div class="project-city">Medford–Portland Corridor</div>
+        <div class="project-title">Heat Vulnerability Index for Rural Oregon Communities</div>
+        <div class="project-desc">Mapping which communities along the I-5 corridor face the greatest heat exposure with the fewest resources — and who the state is missing.</div>
+      </div>
+      <div class="project-footer">
+        <span>Climate · Equity · Data</span>
+        <span class="learn-arrow">→</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="map-band">
+  <div class="map-band-text fade-up">
+    <h3>One corridor. Two climate realities. Shared future.</h3>
+    <p>From Ashland's Siskiyou foothills to Portland's Willamette riverbanks — connected by I-5, shaped by the same mountains, facing the same trajectory.</p>
+  </div>
+  <div class="map-divider"></div>
+  <div class="map-band-stat fade-up fade-up-delay-1">
+    <div class="big">280</div>
+    <div class="label">Miles of corridor</div>
+  </div>
+  <div class="map-divider"></div>
+  <div class="map-band-stat fade-up fade-up-delay-2">
+    <div class="big">20°</div>
+    <div class="label">Avg warmer summers in Ashland</div>
+  </div>
+  <div class="map-divider"></div>
+  <div class="map-band-stat fade-up fade-up-delay-3">
+    <div class="big">40%</div>
+    <div class="label">Snowpack decline since 1950</div>
+  </div>
+</div>
+
+<!-- SUBMIT -->
+<section class="submit-section" id="submit">
+  <div class="submit-left">
+    <h2>Share your<br /><em>project or story.</em></h2>
+    <p>This platform is built on community knowledge. If you're working on something related to water, fire, climate adaptation, or resilience anywhere along the Ashland–Portland corridor, we want to feature it.</p>
+    <ul class="submit-steps">
+      <li><span class="step-num">01</span> Fill out our community project form with your project details and location.</li>
+      <li><span class="step-num">02</span> Our team reviews submissions and reaches out to learn more about your work.</li>
+      <li><span class="step-num">03</span> Your project gets featured on the platform and connected to similar work across the corridor.</li>
+      <li><span class="step-num">04</span> All data lives in a shared Google Sheet — open, accessible, community-owned.</li>
+    </ul>
+    <a class="btn-gold" href="https://docs.google.com/forms" target="_blank" rel="noopener">
+      Submit Your Project →
+    </a>
+  </div>
+  <div class="submit-right">
+    <h3>We're collecting projects on:</h3>
+    <div class="categories">
+      <span class="cat-badge active">Water</span>
+      <span class="cat-badge">Wildfire &amp; Smoke</span>
+      <span class="cat-badge">Heat &amp; Drought</span>
+      <span class="cat-badge">Compounding Hazards</span>
+      <span class="cat-badge">Community Resilience</span>
+      <span class="cat-badge">Equity &amp; Access</span>
+      <span class="cat-badge">Biodiversity</span>
+      <span class="cat-badge">Agriculture</span>
+      <span class="cat-badge">Emergency Response</span>
+      <span class="cat-badge">Policy &amp; Governance</span>
+    </div>
+    <p class="data-note">Project submissions are stored in a linked Google Sheet. All data is community-owned and openly accessible. We use Google Forms so any community member can participate — no account required.</p>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voices-section" id="voices">
+  <div class="section-header fade-up">
+    <h2>Rural Voices</h2>
+    <a href="#">More stories →</a>
+  </div>
+  <p class="voices-intro fade-up">The people of Ashland and the Rogue Valley have been navigating climate reality for years. Their knowledge is not anecdotal — it is expertise.</p>
+  <div class="voices-grid">
+    <div class="voice-card fade-up">
+      <p class="voice-quote">We've been watching our creek drop every August for fifteen years. It used to be reliable. Now we plan our whole summer around the fact that it won't be.</p>
+      <div class="voice-attr">Rogue Valley farmer · Talent, OR</div>
+    </div>
+    <div class="voice-card fade-up fade-up-delay-1">
+      <p class="voice-quote">The smoke starts earlier every year. We've built a whole community alert system just from sharing notes with our neighbors. Portland is going to need that too.</p>
+      <div class="voice-attr">Ashland resident · 18 years in the valley</div>
+    </div>
+    <div class="voice-card fade-up fade-up-delay-2">
+      <p class="voice-quote">Rural communities aren't waiting for policy to catch up. We're doing the work because nobody's coming to do it for us. That knowledge should be shared, not silo'd.</p>
+      <div class="voice-attr">Community organizer · Jackson County</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-text fade-up">
+    <h3>Stay in the corridor.</h3>
+    <p>Get project updates, new voices, and climate insights from Ashland to Portland.</p>
+  </div>
+  <form class="newsletter-form fade-up fade-up-delay-1" onsubmit="handleSubscribe(event)">
+    <input type="email" placeholder="your@email.com" required aria-label="Email address"/>
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Rogue ↔ River</div>
+    <p class="footer-tagline">A community knowledge platform connecting Ashland and Portland across Oregon's climate corridor. Built on open data. Powered by community voices.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Issues</h4>
+    <ul>
+      <li><a href="#">Water</a></li>
+      <li><a href="#">Fire</a></li>
+      <li><a href="#">Compounding Hazards</a></li>
+      <li><a href="#">Climate Change</a></li>
+      <li><a href="#">Equity</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Community</h4>
+    <ul>
+      <li><a href="#">Submit a Project</a></li>
+      <li><a href="#">Project Map</a></li>
+      <li><a href="#">Voices</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Open Data</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>About</h4>
+    <ul>
+      <li><a href="#">Our Mission</a></li>
+      <li><a href="#">Team</a></li>
+      <li><a href="#">Collaborate</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Rogue to River — Ashland ↔ Portland Climate Corridor</span>
+  <span>Built for community · Hosted on GitHub Pages</span>
+</div>
+
+<script>
+  // Scroll-based fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Trigger hero items immediately
+  setTimeout(() => {
+    document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+  }, 100);
+
+  // Category badge toggle
+  document.querySelectorAll('.cat-badge').forEach(b => {
+    b.addEventListener('click', () => b.classList.toggle('active'));
+  });
+
+  // Newsletter
+  function handleSubscribe(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Thank you!';
+    btn.style.background = 'var(--clay)';
+  }
+</script>
+</body>
+</html>
