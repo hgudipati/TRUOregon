@@ -531,15 +531,15 @@ Copy
     // TRU corridor waypoints (Ashland → Medford → Grants Pass → Roseburg → Eugene → Salem → Portland)
     const corridor = [
       [42.1954, -122.7095],   // Ashland (SOU)
-      [42.3265, -122.8756],   // Medford
-      [42.4390, -123.3284],   // Grants Pass
-      [43.2165, -123.3417],   // Roseburg
-      [44.0521, -123.0868],   // Eugene
-      [44.9429, -123.0351],   // Salem
+      //[42.3265, -122.8756],   // Medford
+      //[42.4390, -123.3284],   // Grants Pass
+      //[43.2165, -123.3417],   // Roseburg
+      //[44.0521, -123.0868],   // Eugene
+      //[44.9429, -123.0351],   // Salem
       [45.5051, -122.6750],   // Portland (PSU)
     ];
     L.polyline(corridor, {
-      color: '#c99a3e',
+      color: '#4d6b52',
       weight: 3,
       opacity: 0.85,
       dashArray: '8 5',
@@ -575,24 +575,24 @@ Copy
     makeMarker([45.5051, -122.6750], '#7aaabb', 'Portland', '· PSU').addTo(map);
  
     // Waypoint dots (smaller)
-    [
-      [[42.3265, -122.8756], 'Medford'],
-      [[42.4390, -123.3284], 'Grants Pass'],
-      [[43.2165, -123.3417], 'Roseburg'],
-      [[44.0521, -123.0868], 'Eugene'],
-      [[44.9429, -123.0351], 'Salem'],
-    ].forEach(([latlng, name]) => {
-      L.circleMarker(latlng, {
-        radius: 4,
-        fillColor: '#c99a3e',
-        color: 'rgba(242,237,230,0.7)',
-        weight: 1.5,
-        fillOpacity: 0.9,
-      }).bindTooltip(name, {
-        permanent: false,
-        direction: 'right',
-        className: 'tru-tooltip',
-      }).addTo(map);
+    //[
+    //  [[42.3265, -122.8756], 'Medford'],
+    //  [[42.4390, -123.3284], 'Grants Pass'],
+    //  [[43.2165, -123.3417], 'Roseburg'],
+    //  [[44.0521, -123.0868], 'Eugene'],
+   //   [[44.9429, -123.0351], 'Salem'],
+   // ].forEach(([latlng, name]) => {
+   //   L.circleMarker(latlng, {
+   //     radius: 4,
+   //     fillColor: '#c99a3e',
+   //     color: 'rgba(242,237,230,0.7)',
+   //     weight: 1.5,
+   //     fillOpacity: 0.9,
+   //   }).bindTooltip(name, {
+   //     permanent: false,
+   //     direction: 'right',
+   //     className: 'tru-tooltip',
+   //   }).addTo(map);
     });
  
     // Small Leaflet attribution in corner
@@ -791,15 +791,15 @@ Copy
         <path d="M90 55 L565 55 L580 110 L572 180 L565 290 L558 400 L552 510 L545 610 L390 770 L220 770 L100 670 L82 560 L72 400 L76 200 Z"
           fill="rgba(61,107,122,0.07)" stroke="rgba(61,107,122,0.3)" stroke-width="1.5"/>
  
-        <!-- Cascade mountain range hint (west side) -->
-        <path d="M130 55 L130 400 L145 420 L130 450 L140 500 L125 550 L135 620 L120 680 L130 770"
-          fill="none" stroke="rgba(122,140,110,0.2)" stroke-width="1.5" stroke-dasharray="4 6"/>
+        //<!-- Cascade mountain range hint (west side) -->
+        //<path d="M130 55 L130 400 L145 420 L130 450 L140 500 L125 550 L135 620 L120 680 L130 770"
+        //  fill="none" stroke="rgba(122,140,110,0.2)" stroke-width="1.5" stroke-dasharray="4 6"/>
  
-        <!-- Willamette Valley label zone -->
-        <text x="210" y="200" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.3)" letter-spacing="3" text-anchor="middle">WILLAMETTE VALLEY</text>
-        <text x="340" y="620" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.25)" letter-spacing="2" text-anchor="middle">ROGUE VALLEY</text>
+       // <!-- Willamette Valley label zone -->
+       // <text x="210" y="200" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.3)" letter-spacing="3" text-anchor="middle">WILLAMETTE VALLEY</text>
+       // <text x="340" y="620" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.25)" letter-spacing="2" text-anchor="middle">ROGUE VALLEY</text>
  
-        <!-- I-5 / TRU corridor route -->
+        <!-- TRU corridor route -->
         <path id="corridorPath"
           d="M295 750 C 300 720 305 690 308 660 C 312 625 318 600 322 570 C 328 535 335 508 340 478 C 346 445 348 415 350 385 C 353 350 355 318 356 285 C 357 255 356 225 354 195 C 352 165 348 138 344 112 C 340 88 335 68 330 55"
           fill="none" stroke="rgba(201,154,62,0.25)" stroke-width="3"/>
