@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — TRU Oregon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ash:       #2b2824;
+      --smoke:     #4a4540;
+      --bark:      #6b5c4e;
+      --clay:      #a07855;
+      --sage:      #7a8c6e;
+      --fern:      #4d6b52;
+      --river:     #3d6b7a;
+      --sky:       #7aaabb;
+      --cream:     #f2ede6;
+      --parchment: #e8e0d4;
+      --ember:     #c4622d;
+      --gold:      #c99a3e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ash);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(242,237,230,0.93);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(107,92,78,0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 900;
+      color: var(--ash); text-decoration: none;
+      display: flex; flex-direction: column; line-height: 1.1;
+    }
+    .nav-logo-sub {
+      font-family: 'DM Mono', monospace; font-size: 0.55rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--smoke); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ember); }
+    .nav-cta {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--ember); color: #fff;
+      padding: 0.52rem 1.2rem; text-decoration: none;
+      transition: background 0.2s; margin-left: 0.8rem;
+    }
+    .nav-cta:hover { background: var(--clay); }
+
+    /* ── LOADING / ERROR STATES ── */
+    .state-wrap {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; flex-direction: column;
+      gap: 1rem; padding: 2rem; text-align: center;
+      padding-top: 100px;
+    }
+    .loading-spinner {
+      width: 32px; height: 32px;
+      border: 2px solid var(--parchment);
+      border-top-color: var(--ember);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .state-label {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark);
+    }
+
+    /* ── PROJECT HERO ── */
+    .project-hero {
+      padding-top: 68px;
+      background: var(--ash);
+      position: relative; overflow: hidden;
+    }
+    .project-hero-inner {
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: 0; min-height: 380px;
+    }
+    .project-hero-left {
+      padding: 4rem 4rem 4rem 5rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .project-breadcrumb {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(242,237,230,0.4); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .project-breadcrumb a { color: rgba(242,237,230,0.4); text-decoration: none; transition: color 0.2s; }
+    .project-breadcrumb a:hover { color: var(--gold); }
+    .project-breadcrumb span { opacity: 0.4; }
+    .project-hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .tag {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.7rem;
+    }
+    .tag-water   { background: rgba(61,107,122,0.25);  color: var(--sky); }
+    .tag-fire    { background: rgba(196,98,45,0.25);   color: #e8896a; }
+    .tag-climate { background: rgba(77,107,82,0.25);   color: #8ab88e; }
+    .tag-hazard  { background: rgba(160,120,85,0.25);  color: var(--clay); }
+    .tag-type {
+      background: rgba(201,154,62,0.15);
+      border: 1px solid rgba(201,154,62,0.4);
+      color: var(--gold);
+    }
+    .project-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--cream); margin-bottom: 1rem;
+    }
+    .project-hero-meta {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+    }
+    .meta-item {
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .meta-label {
+      font-family: 'DM Mono', monospace; font-size: 0.58rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(242,237,230,0.35);
+    }
+    .meta-value {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.06em; color: rgba(242,237,230,0.8);
+    }
+
+    /* Side panel */
+    .project-hero-right {
+      background: rgba(0,0,0,0.25);
+      border-left: 1px solid rgba(242,237,230,0.08);
+      padding: 4rem 3rem;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 2rem;
+    }
+    .sidebar-label {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(242,237,230,0.3); margin-bottom: 0.5rem;
+    }
+    .sidebar-value {
+      font-size: 0.88rem; color: rgba(242,237,230,0.7); line-height: 1.6;
+    }
+    .sidebar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--cream);
+    }
+    .sidebar-role {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; color: var(--gold);
+      text-transform: uppercase; margin-top: 0.2rem;
+    }
+    .sidebar-org {
+      font-size: 0.82rem; color: rgba(242,237,230,0.5); margin-top: 0.2rem;
+    }
+
+    /* ── PROJECT BODY ── */
+    .project-body-wrap {
+      display: grid; grid-template-columns: 1fr 340px;
+      gap: 5rem; padding: 5rem 5rem 6rem;
+      max-width: 1200px;
+    }
+    .project-main h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--ash); margin-bottom: 1rem;
+    }
+    .project-description {
+      font-size: 1rem; color: var(--smoke);
+      line-height: 1.85; margin-bottom: 3rem;
+      white-space: pre-wrap;
+    }
+    .project-insight {
+      background: var(--ash); color: var(--cream);
+      padding: 2rem 2.5rem; margin-bottom: 3rem;
+      position: relative;
+    }
+    .project-insight::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; line-height: 1;
+      color: var(--ember); opacity: 0.4;
+      position: absolute; top: 0.5rem; left: 1.5rem;
+    }
+    .project-insight p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.1rem;
+      line-height: 1.6; position: relative; z-index: 1;
+      padding-top: 1.5rem;
+    }
+    .project-insight .insight-attr {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--clay); margin-top: 1rem;
+    }
+
+    /* Sidebar */
+    .project-sidebar { padding-top: 0.5rem; }
+    .sidebar-section { margin-bottom: 2.5rem; }
+    .sidebar-section-label {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--bark); border-bottom: 1px solid var(--parchment);
+      padding-bottom: 0.5rem; margin-bottom: 1rem;
+    }
+    .sidebar-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .sidebar-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem; background: var(--parchment);
+      color: var(--smoke); border: 1px solid rgba(107,92,78,0.2);
+    }
+    .status-pill {
+      display: inline-block;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      background: rgba(77,107,82,0.12);
+      border: 1px solid rgba(77,107,82,0.3);
+      color: var(--fern);
+    }
+    .collab-pill {
+      display: inline-block;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      background: rgba(61,107,122,0.1);
+      border: 1px solid rgba(61,107,122,0.3);
+      color: var(--river);
+    }
+    .project-link-btn {
+      display: block; width: 100%;
+      background: var(--ash); color: var(--cream);
+      padding: 0.9rem 1.5rem;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; text-align: center;
+      border: 2px solid var(--ash);
+      transition: background 0.2s, border-color 0.2s;
+      margin-bottom: 0.8rem;
+    }
+    .project-link-btn:hover { background: var(--ember); border-color: var(--ember); }
+    .project-link-btn.outline {
+      background: transparent; color: var(--ash);
+    }
+    .project-link-btn.outline:hover { background: var(--ash); color: var(--cream); }
+
+    /* ── MORE PROJECTS ── */
+    .more-projects {
+      background: var(--parchment);
+      padding: 5rem;
+      border-top: 1px solid rgba(107,92,78,0.15);
+    }
+    .more-projects h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      margin-bottom: 2rem;
+    }
+    .more-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .more-card {
+      background: var(--cream);
+      border: 1px solid rgba(107,92,78,0.2);
+      padding: 1.5rem;
+      text-decoration: none; color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .more-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(43,40,36,0.08); }
+    .more-card-city {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--clay); margin-bottom: 0.4rem;
+    }
+    .more-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--ash); line-height: 1.3;
+    }
+    .more-empty {
+      grid-column: 1/-1; text-align: center;
+      font-size: 0.88rem; color: var(--smoke);
+      padding: 2rem; font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ash); color: rgba(242,237,230,0.55);
+      padding: 2.5rem 5rem;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 900; color: var(--cream);
+    }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(242,237,230,0.45); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      background: var(--ash);
+      border-top: 1px solid rgba(242,237,230,0.08);
+      padding: 1rem 5rem;
+      display: flex; justify-content: space-between;
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(242,237,230,0.28);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .project-hero-inner { grid-template-columns: 1fr; }
+      .project-hero-right { display: none; }
+      .project-hero-left { padding: 3rem 2rem; }
+      .project-body-wrap { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 2rem 4rem; }
+      .more-projects { padding: 3rem 2rem; }
+      .more-grid { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 2rem; flex-direction: column; align-items: flex-start; }
+      .footer-bottom { padding: 1rem 2rem; flex-direction: column; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span style="font-family:'Playfair Display',serif;font-weight:900;">TRU Oregon</span>
+    <span class="nav-logo-sub">Transect · Rural to Urban</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#issues">Issues</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="index.html#corridor-map">The Corridor</a></li>
+    <li><a href="team.html">Community</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <a class="nav-cta" href="index.html#submit">Submit a Project</a>
+</nav>
+
+<!-- DYNAMIC CONTENT — filled by JS -->
+<div id="page-content">
+  <div class="state-wrap">
+    <div class="loading-spinner"></div>
+    <p class="state-label">Loading project…</p>
+  </div>
+</div>
+
+<script>
+  // ── CONFIG ────────────────────────────────────────────────────────────────
+  const SHEET_ID  = '1SGcpZPguHhaTmYwrtLy1_0Ttz8R8uPycC01yVz-hn5o';
+  const SHEET_GID = '1903097570';
+  const CSV_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+
+  const ISSUE_TAG_CLASS = {
+    'Water': 'tag-water', 'Wildfire & Smoke': 'tag-fire',
+    'Heat & Drought': 'tag-hazard', 'Compounding Hazards': 'tag-hazard',
+    'Community Resilience': 'tag-climate', 'Equity & Access': 'tag-climate',
+    'Biodiversity & Habitat': 'tag-climate', 'Agriculture & Food Systems': 'tag-climate',
+    'Emergency Response': 'tag-fire', 'Policy & Governance': 'tag-water',
+    'Climate Change': 'tag-climate',
+  };
+
+  // ── CSV PARSER ─────────────────────────────────────────────────────────────
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = splitCSVLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const vals = splitCSVLine(line);
+      const obj = {};
+      headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+      return obj;
+    }).filter(r => r.project_title);
+  }
+
+  function splitCSVLine(line) {
+    const result = []; let cur = '', inQuote = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuote && line[i+1] === '"') { cur += '"'; i++; }
+        else inQuote = !inQuote;
+      } else if (ch === ',' && !inQuote) { result.push(cur); cur = ''; }
+      else { cur += ch; }
+    }
+    result.push(cur);
+    return result;
+  }
+
+  // ── URL PARAM ─────────────────────────────────────────────────────────────
+  function getParam(key) {
+    return new URLSearchParams(window.location.search).get(key) || '';
+  }
+
+  // ── MATCH PROJECT ─────────────────────────────────────────────────────────
+  function findProject(projects, titleSlug) {
+    const decoded = decodeURIComponent(titleSlug).toLowerCase();
+    return projects.find(p => {
+      const slug = p.project_title.replace(/\s+/g, '-').toLowerCase();
+      return slug === decoded || p.project_title.toLowerCase() === decoded;
+    }) || projects[0]; // fallback to first project
+  }
+
+  // ── RENDER PAGE ───────────────────────────────────────────────────────────
+  function renderPage(p, allProjects) {
+    // Update page title
+    document.title = `${p.project_title} — TRU Oregon`;
+
+    const issues   = p.issue_areas ? p.issue_areas.split(',').map(s => s.trim()).filter(Boolean) : [];
+    const workTypes= p.work_types  ? p.work_types.split(',').map(s => s.trim()).filter(Boolean)  : [];
+
+    const issueTags = issues.map(iss => {
+      const cls = ISSUE_TAG_CLASS[iss] || 'tag-climate';
+      return `<span class="tag ${cls}">${iss}</span>`;
+    }).join('');
+
+    const workTags = workTypes.map(w => `<span class="tag tag-type">${w}</span>`).join('');
+
+    // Other projects for "More Projects" section
+    const others = allProjects
+      .filter(q => q.project_title !== p.project_title)
+      .slice(0, 3);
+
+    const moreCards = others.length
+      ? others.map(q => {
+          const slug = encodeURIComponent(q.project_title.replace(/\s+/g, '-').toLowerCase());
+          const qIssues = q.issue_areas ? q.issue_areas.split(',').map(s => s.trim()) : [];
+          const qTags = qIssues.slice(0,2).map(iss => `<span class="tag ${ISSUE_TAG_CLASS[iss]||'tag-climate'}" style="font-size:0.55rem;padding:0.2rem 0.5rem;">${iss}</span>`).join('');
+          return `
+            <a class="more-card" href="project.html?title=${slug}">
+              <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.6rem;">${qTags}</div>
+              <div class="more-card-city">${q.location_city || q.location_primary || ''}</div>
+              <div class="more-card-title">${q.project_title}</div>
+            </a>`;
+        }).join('')
+      : '<div class="more-empty">More projects coming soon — <a href="index.html#submit">submit yours</a>.</div>';
+
+    const insightBlock = p.corridor_insight ? `
+      <div class="project-insight">
+        <p>${p.corridor_insight}</p>
+        <div class="insight-attr">Corridor insight · ${p.contributor_name || 'Contributor'}</div>
+      </div>` : '';
+
+    const externalLink = p.project_url ? `
+      <a class="project-link-btn" href="${p.project_url}" target="_blank" rel="noopener">
+        View Project Resource →
+      </a>` : '';
+
+    const collabStatus = p.open_to_collab && !p.open_to_collab.toLowerCase().includes('not')
+      ? `<div class="collab-pill">Open to collaboration</div>` : '';
+
+    document.getElementById('page-content').innerHTML = `
+
+      <!-- PROJECT HERO -->
+      <div class="project-hero">
+        <div class="project-hero-inner">
+          <div class="project-hero-left">
+            <div class="project-breadcrumb">
+              <a href="index.html">TRU Oregon</a>
+              <span>/</span>
+              <a href="projects.html">Projects</a>
+              <span>/</span>
+              <span style="color:rgba(242,237,230,0.6)">${p.project_title}</span>
+            </div>
+            <div class="project-hero-tags">${issueTags}${workTags}</div>
+            <h1 class="project-hero-title">${p.project_title}</h1>
+            <div class="project-hero-meta">
+              ${p.location_city ? `<div class="meta-item"><div class="meta-label">Location</div><div class="meta-value">📍 ${p.location_city}</div></div>` : ''}
+              ${p.status ? `<div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">${p.status}</div></div>` : ''}
+              ${p.contributor_name ? `<div class="meta-item"><div class="meta-label">Contributor</div><div class="meta-value">${p.contributor_name}</div></div>` : ''}
+            </div>
+          </div>
+          <div class="project-hero-right">
+            ${p.contributor_name ? `
+              <div>
+                <div class="sidebar-label">Contributor</div>
+                <div class="sidebar-name">${p.contributor_name}</div>
+                ${p.role ? `<div class="sidebar-role">${p.role}</div>` : ''}
+                ${p.organization ? `<div class="sidebar-org">${p.organization}</div>` : ''}
+              </div>` : ''}
+            ${p.bio ? `
+              <div>
+                <div class="sidebar-label">About</div>
+                <div class="sidebar-value">${p.bio}</div>
+              </div>` : ''}
+            ${p.location_primary ? `
+              <div>
+                <div class="sidebar-label">Region</div>
+                <div class="sidebar-value">${p.location_primary}</div>
+              </div>` : ''}
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT BODY -->
+      <div class="project-body-wrap">
+        <div class="project-main">
+          <h2>About this project</h2>
+          <div class="project-description">${p.project_description || ''}</div>
+          ${insightBlock}
+        </div>
+
+        <aside class="project-sidebar">
+          ${issues.length ? `
+            <div class="sidebar-section">
+              <div class="sidebar-section-label">Issue Areas</div>
+              <div class="sidebar-tags">
+                ${issues.map(iss => `<span class="sidebar-tag">${iss}</span>`).join('')}
+              </div>
+            </div>` : ''}
+
+          ${workTypes.length ? `
+            <div class="sidebar-section">
+              <div class="sidebar-section-label">Type of Work</div>
+              <div class="sidebar-tags">
+                ${workTypes.map(w => `<span class="sidebar-tag">${w}</span>`).join('')}
+              </div>
+            </div>` : ''}
+
+          ${p.status ? `
+            <div class="sidebar-section">
+              <div class="sidebar-section-label">Status</div>
+              <div class="status-pill">${p.status}</div>
+            </div>` : ''}
+
+          ${collabStatus ? `
+            <div class="sidebar-section">
+              <div class="sidebar-section-label">Collaboration</div>
+              ${collabStatus}
+            </div>` : ''}
+
+          <div class="sidebar-section">
+            <div class="sidebar-section-label">Get Involved</div>
+            ${externalLink}
+            <a class="project-link-btn outline" href="index.html#submit">Submit Your Own Project</a>
+          </div>
+        </aside>
+      </div>
+
+      <!-- MORE PROJECTS -->
+      <div class="more-projects">
+        <h3>More projects from the corridor</h3>
+        <div class="more-grid">${moreCards}</div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-logo">TRU Oregon</div>
+        <ul class="footer-links">
+          <li><a href="index.html#issues">Issues</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="index.html#corridor-map">The Corridor</a></li>
+          <li><a href="team.html">Contributors</a></li>
+          <li><a href="index.html#submit">Submit</a></li>
+          <li><a href="YOUR_GITHUB_REPO_URL_HERE" target="_blank">GitHub</a></li>
+        </ul>
+      </footer>
+      <div class="footer-bottom">
+        <span>© 2026 TRU Oregon — Transect for Rural to Urban Oregon · SOU &amp; PSU</span>
+        <span>Built for community · Hosted on GitHub Pages</span>
+      </div>
+    `;
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+  async function init() {
+    const titleSlug = getParam('title');
+
+    try {
+      const res = await fetch(CSV_URL);
+      if (!res.ok) throw new Error('Sheet fetch failed: ' + res.status);
+      const text     = await res.text();
+      const projects = parseCSV(text);
+
+      if (!projects.length) throw new Error('No projects found in sheet');
+
+      const project = titleSlug ? findProject(projects, titleSlug) : projects[0];
+      renderPage(project, projects);
+
+    } catch (err) {
+      console.error('TRU Oregon project page error:', err);
+      document.getElementById('page-content').innerHTML = `
+        <div class="state-wrap">
+          <p class="state-label" style="color:var(--ember);">Could not load project</p>
+          <p style="font-size:0.88rem;color:var(--smoke);max-width:420px;margin-top:0.5rem;">
+            Make sure the Published Projects sheet is shared publicly (Anyone with the link → Viewer).
+          </p>
+          <a href="index.html" style="margin-top:1.5rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ember);">
+            ← Back to TRU Oregon
+          </a>
+        </div>`;
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
