@@ -265,6 +265,43 @@
     /* ── PROJECTS ── */
     .projects-section { padding: 6rem 5rem; }
     .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .projects-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--smoke);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .loading-spinner {
+      width: 28px; height: 28px;
+      border: 2px solid var(--parchment);
+      border-top-color: var(--ember);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .projects-empty {
+      grid-column: 1 / -1;
+      margin-top: 0;
+      padding: 4rem 3rem;
+      border: 2px dashed rgba(107,92,78,0.3);
+      text-align: center;
+      background: var(--parchment);
+    }
+    .projects-empty-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .projects-empty-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--ash); margin-bottom: 0.7rem;
+    }
+    .projects-empty-sub {
+      font-size: 0.9rem; color: var(--smoke);
+      max-width: 480px; margin: 0 auto; line-height: 1.8;
+    }
     .project-card { background: var(--parchment); border: 1px solid rgba(107,92,78,0.25); transition: transform 0.25s, box-shadow 0.25s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
     .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(43,40,36,0.1); }
     .project-tag-row { display: flex; gap: 0.5rem; padding: 1.2rem 1.5rem 0; }
@@ -438,12 +475,12 @@
   <div class="hero-left">
     <div class="hero-eyebrow fade-up">Transect for Rural to Urban Oregon</div>
     <h1 class="hero-title fade-up fade-up-delay-1">
-      Transect for Rural to Urban Oregon<br /><em>fire, water, and climate future</em>
+      Ashland is Portland<br /><em>in 20 years.</em>
     </h1>
     <p class="hero-acronym fade-up fade-up-delay-1">TRU — where the transect begins.</p>
     <p class="hero-subtitle fade-up fade-up-delay-2">
       A partnership between Southern Oregon University and Portland State University,
-      TRU Oregon connects across transects from rural to urban interfaces —
+      TRU Oregon connects rural Ashland's hard-won climate lessons with Portland's future —
       amplifying community voices and building resilience across 280 miles of corridor.
     </p>
     <div class="hero-partners fade-up fade-up-delay-2">
@@ -593,45 +630,14 @@
 <section class="projects-section" id="projects">
   <div class="section-header fade-up">
     <h2>Featured Projects</h2>
-    <a href="#">All projects →</a>
+    <a href="projects.html">All projects →</a>
   </div>
-  <div class="projects-grid">
-    <a class="project-card fade-up" href="#">
-      <div class="project-tag-row">
-        <span class="tag tag-water">Water</span>
-        <span class="tag tag-climate">Climate</span>
-      </div>
-      <div class="project-body">
-        <div class="project-city">SOU · Ashland, OR</div>
-        <div class="project-title">Crowdsourcing Snowpack Memory in Bear Creek Watershed</div>
-        <div class="project-desc">Community volunteers track seasonal snowpack decline using historical photo archives and current measurements — building a 40-year dataset no agency has compiled.</div>
-      </div>
-      <div class="project-footer"><span>Water · Community Science</span><span class="learn-arrow">→</span></div>
-    </a>
-    <a class="project-card fade-up fade-up-delay-1" href="#">
-      <div class="project-tag-row">
-        <span class="tag tag-fire">Fire</span>
-        <span class="tag tag-hazard">Compounding</span>
-      </div>
-      <div class="project-body">
-        <div class="project-city">PSU · Portland, OR</div>
-        <div class="project-title">Smoke Season Preparedness: What Ashland Figured Out</div>
-        <div class="project-desc">A cross-city policy brief adapting Ashland's air quality response playbook for Portland's denser, more vulnerable neighborhoods — written with SOU partners.</div>
-      </div>
-      <div class="project-footer"><span>Fire · Policy</span><span class="learn-arrow">→</span></div>
-    </a>
-    <a class="project-card fade-up fade-up-delay-2" href="#">
-      <div class="project-tag-row">
-        <span class="tag tag-climate">Climate</span>
-        <span class="tag tag-hazard">Equity</span>
-      </div>
-      <div class="project-body">
-        <div class="project-city">TRU Corridor · SOU–PSU</div>
-        <div class="project-title">Heat Vulnerability Index for Rural Oregon Communities</div>
-        <div class="project-desc">Mapping which communities along the I-5 transect face the greatest heat exposure with the fewest resources — and who the state is missing.</div>
-      </div>
-      <div class="project-footer"><span>Climate · Equity · Data</span><span class="learn-arrow">→</span></div>
-    </a>
+  <div id="projects-grid" class="projects-grid">
+    <!-- Loaded from Google Sheet -->
+    <div class="projects-loading">
+      <div class="loading-spinner"></div>
+      <p>Loading projects…</p>
+    </div>
   </div>
 </section>
 
@@ -851,7 +857,7 @@
       <li><span class="step-num">03</span> Your project gets featured on TRU Oregon and connected to similar work across the corridor.</li>
       <li><span class="step-num">04</span> All data lives in a shared Google Sheet — open, accessible, community-owned.</li>
     </ul>
-    <a class="btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSe3Osx4BjILFaqSdDO49a6H8jkv_42zFJClhPMS_1fHDJ0Hzg/viewform?usp=sharing&ouid=100676583937255173431" target="_blank" rel="noopener">Submit Your Project →</a>
+    <a class="btn-gold" href="YOUR_GOOGLE_FORM_URL_HERE" target="_blank" rel="noopener">Submit Your Project →</a>
   </div>
   <div class="submit-right">
     <h3>We're collecting projects on:</h3>
@@ -931,7 +937,7 @@
       <li><a href="https://sou.edu" target="_blank">SOU</a></li>
       <li><a href="https://pdx.edu" target="_blank">PSU</a></li>
       <li><a href="#">Contact</a></li>
-      <li><a href="https://github.com/hgudipati/TRUOregon/" target="_blank">GitHub</a></li>
+      <li><a href="YOUR_GITHUB_REPO_URL_HERE" target="_blank">GitHub</a></li>
     </ul>
   </div>
 </footer>
@@ -941,7 +947,132 @@
 </div>
 
 <script>
-  // Fade-up on scroll
+  // ── SHEET CONFIG ──────────────────────────────────────────────────────────
+  const SHEET_ID  = '1SGcpZPguHhaTmYwrtLy1_0Ttz8R8uPycC01yVz-hn5o';
+  const SHEET_GID = '1903097570'; // Published Projects tab
+
+  const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+
+  // Issue area → tag CSS class
+  const ISSUE_TAG_CLASS = {
+    'Water':                      'tag-water',
+    'Wildfire & Smoke':           'tag-fire',
+    'Heat & Drought':             'tag-hazard',
+    'Compounding Hazards':        'tag-hazard',
+    'Community Resilience':       'tag-climate',
+    'Equity & Access':            'tag-climate',
+    'Biodiversity & Habitat':     'tag-climate',
+    'Agriculture & Food Systems': 'tag-climate',
+    'Emergency Response':         'tag-fire',
+    'Policy & Governance':        'tag-water',
+    'Climate Change':             'tag-climate',
+  };
+
+  // ── CSV PARSER ────────────────────────────────────────────────────────────
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = splitCSVLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const vals = splitCSVLine(line);
+      const obj = {};
+      headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+      return obj;
+    }).filter(r => r.project_title); // skip blank rows
+  }
+
+  function splitCSVLine(line) {
+    const result = [];
+    let cur = '', inQuote = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuote && line[i+1] === '"') { cur += '"'; i++; }
+        else inQuote = !inQuote;
+      } else if (ch === ',' && !inQuote) {
+        result.push(cur); cur = '';
+      } else {
+        cur += ch;
+      }
+    }
+    result.push(cur);
+    return result;
+  }
+
+  // ── BUILD PROJECT CARD HTML ───────────────────────────────────────────────
+  function buildCard(p, index) {
+    const issues = p.issue_areas
+      ? p.issue_areas.split(',').map(s => s.trim()).filter(Boolean)
+      : [];
+    const tagsHTML = issues.slice(0, 2).map(issue => {
+      const cls = ISSUE_TAG_CLASS[issue] || 'tag-climate';
+      return `<span class="tag ${cls}">${issue}</span>`;
+    }).join('');
+
+    const city    = p.location_city || p.location_primary || '';
+    const orgLine = p.organization  ? `${p.organization} · ` : '';
+    const slug    = encodeURIComponent(p.project_title.replace(/\s+/g, '-').toLowerCase());
+    const delay   = index % 3 === 1 ? 'fade-up-delay-1' : index % 3 === 2 ? 'fade-up-delay-2' : '';
+    const workType = p.work_types ? p.work_types.split(',')[0].trim() : '';
+    const desc = p.project_description
+      ? (p.project_description.length > 160
+          ? p.project_description.slice(0, 157) + '…'
+          : p.project_description)
+      : '';
+
+    return `
+      <a class="project-card fade-up ${delay}" href="project.html?title=${slug}&gid=${SHEET_GID}&sheet=${SHEET_ID}">
+        <div class="project-tag-row">${tagsHTML}</div>
+        <div class="project-body">
+          <div class="project-city">${orgLine}${city}</div>
+          <div class="project-title">${p.project_title}</div>
+          <div class="project-desc">${desc}</div>
+        </div>
+        <div class="project-footer">
+          <span>${workType}</span>
+          <span class="learn-arrow">→</span>
+        </div>
+      </a>`;
+  }
+
+  // ── RENDER INTO PAGE ──────────────────────────────────────────────────────
+  async function loadProjects() {
+    const grid = document.getElementById('projects-grid');
+    try {
+      const res  = await fetch(CSV_URL);
+      if (!res.ok) throw new Error('Sheet fetch failed: ' + res.status);
+      const text = await res.text();
+      const all  = parseCSV(text);
+
+      // Homepage: show featured=TRUE first, then others, max 6
+      const featured = all.filter(p => String(p.featured).toUpperCase() === 'TRUE');
+      const rest      = all.filter(p => String(p.featured).toUpperCase() !== 'TRUE');
+      const display   = [...featured, ...rest].slice(0, 6);
+
+      if (display.length === 0) {
+        grid.innerHTML = `
+          <div class="projects-empty">
+            <div class="projects-empty-icon">🌲</div>
+            <p class="projects-empty-heading">No projects yet — be the first.</p>
+            <p class="projects-empty-sub">Projects submitted through the community form will appear here once reviewed.</p>
+            <a class="btn-primary" href="#submit" style="display:inline-block;margin-top:1.5rem;">Submit Your Project →</a>
+          </div>`;
+      } else {
+        grid.innerHTML = display.map((p, i) => buildCard(p, i)).join('');
+        // Re-observe new fade-up elements
+        document.querySelectorAll('#projects-grid .fade-up').forEach(el => observer.observe(el));
+      }
+    } catch (err) {
+      console.error('TRU Oregon sheet error:', err);
+      grid.innerHTML = `
+        <div class="projects-empty">
+          <div class="projects-empty-icon">⚠️</div>
+          <p class="projects-empty-heading">Couldn't load projects right now.</p>
+          <p class="projects-empty-sub">Make sure the Published Projects sheet is shared publicly. Check the browser console for details.</p>
+        </div>`;
+    }
+  }
+
+  // ── FADE-UP ON SCROLL ─────────────────────────────────────────────────────
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
@@ -950,12 +1081,12 @@
     document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
   }, 80);
 
-  // Category badge toggle
+  // ── CATEGORY BADGE TOGGLE ─────────────────────────────────────────────────
   document.querySelectorAll('.cat-badge').forEach(b => {
     b.addEventListener('click', () => b.classList.toggle('active'));
   });
 
-  // Newsletter
+  // ── NEWSLETTER ────────────────────────────────────────────────────────────
   function handleSubscribe(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button');
@@ -963,55 +1094,28 @@
     btn.style.background = 'var(--clay)';
   }
 
-  // City data
+  // ── CITY MAP ──────────────────────────────────────────────────────────────
   const cities = {
-    portland: {
-      tag: 'PSU · Urban Anchor',
-      name: 'Portland',
-      desc: "Oregon's largest city and northern anchor of the TRU transect. Portland State University leads urban climate research — tracking heat islands, air quality, and the future conditions Ashland is already living through."
-    },
-    salem: {
-      tag: 'State Capital · Mid-Corridor',
-      name: 'Salem',
-      desc: "Oregon's capital sits in the heart of the Willamette Valley. Salem bridges urban policy and rural agriculture, with growing exposure to heat waves, air quality degradation, and flooding from the Willamette River."
-    },
-    eugene: {
-      tag: 'Southern Willamette Valley',
-      name: 'Eugene',
-      desc: 'Eugene marks the transition from the broader Willamette Valley to the more rugged southern ranges. It\'s a bellwether for how mid-size Oregon cities will need to adapt to increasing fire smoke and water stress.'
-    },
-    roseburg: {
-      tag: 'Douglas County · Timber Transition',
-      name: 'Roseburg',
-      desc: 'Roseburg anchors Douglas County, where the timber economy is navigating climate-driven forest change. Wildfire, drought, and restoration economy questions are front and center for this mid-transect community.'
-    },
-    grantspass: {
-      tag: 'Rogue River Corridor',
-      name: 'Grants Pass',
-      desc: "Grants Pass sits along the Rogue River and faces compounding stresses: water allocation conflicts, summer heat extremes, wildfire, and an agricultural economy increasingly strained by drought and smoke."
-    },
-    medford: {
-      tag: 'Rogue Valley Hub',
-      name: 'Medford',
-      desc: "The largest city in southern Oregon, Medford is the urban center of the Rogue Valley. Its summer heat, smoke exposure, and growth pressures make it a critical node where TRU research meets real-time climate stress."
-    },
-    ashland: {
-      tag: 'SOU · Rural Anchor',
-      name: 'Ashland',
-      desc: "The southern anchor of the TRU transect and home to Southern Oregon University. Ashland is living the Oregon climate future now: declining snowpack, earlier fire seasons, drought, and compounding hazards — offering Portland a 20-year preview."
-    }
+    portland:   { tag: 'PSU · Urban Anchor',             name: 'Portland',    desc: "Oregon's largest city and northern anchor of the TRU transect. Portland State University leads urban climate research — tracking heat islands, air quality, and the future conditions Ashland is already living through." },
+    salem:      { tag: 'State Capital · Mid-Corridor',   name: 'Salem',       desc: "Oregon's capital sits in the heart of the Willamette Valley. Salem bridges urban policy and rural agriculture, with growing exposure to heat waves, air quality degradation, and flooding from the Willamette River." },
+    eugene:     { tag: 'Southern Willamette Valley',     name: 'Eugene',      desc: "Eugene marks the transition from the broader Willamette Valley to the more rugged southern ranges. It's a bellwether for how mid-size Oregon cities will need to adapt to increasing fire smoke and water stress." },
+    roseburg:   { tag: 'Douglas County · Timber Transition', name: 'Roseburg', desc: 'Roseburg anchors Douglas County, where the timber economy is navigating climate-driven forest change. Wildfire, drought, and restoration economy questions are front and center for this mid-transect community.' },
+    grantspass: { tag: 'Rogue River Corridor',           name: 'Grants Pass', desc: "Grants Pass sits along the Rogue River and faces compounding stresses: water allocation conflicts, summer heat extremes, wildfire, and an agricultural economy increasingly strained by drought and smoke." },
+    medford:    { tag: 'Rogue Valley Hub',               name: 'Medford',     desc: "The largest city in southern Oregon, Medford is the urban center of the Rogue Valley. Its summer heat, smoke exposure, and growth pressures make it a critical node where TRU research meets real-time climate stress." },
+    ashland:    { tag: 'SOU · Rural Anchor',             name: 'Ashland',     desc: "The southern anchor of the TRU transect and home to Southern Oregon University. Ashland is living the Oregon climate future now: declining snowpack, earlier fire seasons, drought, and compounding hazards — offering Portland a 20-year preview." }
   };
 
   function selectCity(id) {
-    // Update city list highlight
     document.querySelectorAll('.city-list-item').forEach(el => {
       el.classList.toggle('active', el.dataset.city === id);
     });
-    // Update info panel
     const c = cities[id];
     const panel = document.getElementById('infoPanel');
     panel.innerHTML = `<span class="info-tag">${c.tag}</span><h4>${c.name}</h4><p>${c.desc}</p>`;
   }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+  loadProjects();
 </script>
 </body>
 </html>
