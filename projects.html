@@ -16,7 +16,7 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{background:var(--cream);color:var(--ash);font-family:'Libre Baskerville',Georgia,serif;font-size:17px;line-height:1.7;overflow-x:hidden;}
-
+ 
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(242,237,230,0.93);backdrop-filter:blur(8px);border-bottom:1px solid rgba(107,92,78,0.18);}
     .nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--ash);text-decoration:none;display:flex;flex-direction:column;line-height:1.1;}
     .nav-logo-sub{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--clay);}
@@ -25,7 +25,7 @@
     .nav-links a:hover,.nav-links a.active{color:var(--ember);}
     .nav-cta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--ember);color:#fff;padding:0.52rem 1.2rem;text-decoration:none;transition:background 0.2s;margin-left:0.8rem;}
     .nav-cta:hover{background:var(--clay);}
-
+ 
     .page-hero{background:var(--ash);padding:7rem 5rem 4rem;position:relative;overflow:hidden;}
     .page-hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a07855' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
     .page-hero-inner{position:relative;z-index:1;}
@@ -34,18 +34,24 @@
     .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:var(--cream);line-height:1.08;margin-bottom:0.8rem;}
     .page-hero h1 em{font-style:italic;color:var(--gold);}
     .page-hero p{color:rgba(242,237,230,0.65);font-size:0.95rem;max-width:560px;line-height:1.8;}
-
-    .filter-bar{background:var(--parchment);padding:1.4rem 5rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;border-bottom:1px solid rgba(107,92,78,0.2);position:sticky;top:67px;z-index:50;}
-    .filter-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--bark);margin-right:0.3rem;white-space:nowrap;}
-    .filter-btn{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.32rem 0.8rem;border:1px solid rgba(107,92,78,0.3);background:transparent;color:var(--smoke);cursor:pointer;transition:all 0.18s;white-space:nowrap;}
-    .filter-btn:hover{border-color:var(--ember);color:var(--ember);}
-    .filter-btn.active{background:var(--ash);color:var(--cream);border-color:var(--ash);}
-    .filter-sep{width:1px;height:1.4rem;background:rgba(107,92,78,0.25);margin:0 0.2rem;}
-
+ 
+    .filter-section{background:var(--parchment);padding:2rem 5rem;border-bottom:1px solid rgba(107,92,78,0.2);position:sticky;top:67px;z-index:50;}
+    .filter-group{margin-bottom:1.2rem;}
+    .filter-group:last-child{margin-bottom:0;}
+    .filter-group-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bark);margin-bottom:0.6rem;display:block;}
+    .filter-badges{display:flex;flex-wrap:wrap;gap:0.5rem;}
+    .fbadge{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 0.85rem;border:1px solid rgba(107,92,78,0.3);background:transparent;color:var(--smoke);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+    .fbadge:hover{border-color:var(--ember);color:var(--ember);}
+    .fbadge.active{background:var(--ash);color:var(--cream);border-color:var(--ash);}
+    .filter-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+    .filter-meta-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--bark);}
+    .filter-clear{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:none;color:var(--ember);cursor:pointer;padding:0;display:none;}
+    .filter-clear.visible{display:block;}
+ 
     .projects-wrap{padding:4rem 5rem 6rem;}
     .projects-count{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--bark);margin-bottom:2rem;}
     .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
-
+ 
     .project-card{background:var(--parchment);border:1px solid rgba(107,92,78,0.22);transition:transform 0.22s,box-shadow 0.22s;text-decoration:none;color:inherit;display:flex;flex-direction:column;}
     .project-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(43,40,36,0.1);}
     .project-tag-row{display:flex;gap:0.5rem;padding:1.2rem 1.5rem 0;flex-wrap:wrap;}
@@ -60,29 +66,29 @@
     .project-desc{font-size:0.83rem;color:var(--smoke);line-height:1.7;}
     .project-footer{border-top:1px solid rgba(107,92,78,0.18);padding:0.85rem 1.5rem;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--bark);display:flex;align-items:center;justify-content:space-between;}
     .learn-arrow{color:var(--ember);}
-
+ 
     .loading-state{grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--smoke);}
     .loading-spinner{width:28px;height:28px;border:2px solid var(--parchment);border-top-color:var(--ember);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem;}
     .loading-label{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bark);}
     @keyframes spin{to{transform:rotate(360deg);}}
-
+ 
     .empty-state{grid-column:1/-1;padding:4rem 3rem;border:2px dashed rgba(107,92,78,0.28);text-align:center;background:var(--parchment);}
     .empty-heading{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ash);margin-bottom:0.6rem;}
     .empty-sub{font-size:0.88rem;color:var(--smoke);max-width:420px;margin:0 auto 1.5rem;line-height:1.8;}
     .btn-primary{display:inline-block;background:var(--ash);color:var(--cream);padding:0.8rem 1.8rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:2px solid var(--ash);transition:background 0.2s,border-color 0.2s;}
     .btn-primary:hover{background:var(--ember);border-color:var(--ember);}
-
+ 
     footer{background:var(--ash);color:rgba(242,237,230,0.55);padding:2.5rem 5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
     .footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--cream);}
     .footer-links{display:flex;gap:2rem;list-style:none;}
     .footer-links a{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(242,237,230,0.45);text-decoration:none;transition:color 0.2s;}
     .footer-links a:hover{color:var(--gold);}
     .footer-bottom{background:var(--ash);border-top:1px solid rgba(242,237,230,0.08);padding:1rem 5rem;display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(242,237,230,0.28);}
-
+ 
     @media(max-width:900px){
       nav{padding:1rem 1.5rem;}.nav-links{display:none;}
       .page-hero{padding:6rem 2rem 3rem;}
-      .filter-bar{padding:1.2rem 1.5rem;}
+      .filter-section{padding:1.5rem 1.5rem;}
       .projects-wrap{padding:3rem 1.5rem 4rem;}
       .projects-grid{grid-template-columns:1fr;}
       footer{padding:2.5rem 2rem;flex-direction:column;align-items:flex-start;}
@@ -91,7 +97,7 @@
   </style>
 </head>
 <body>
-
+ 
 <nav>
   <a class="nav-logo" href="index.html">
     <span style="font-family:'Playfair Display',serif;font-weight:900;">TRU Oregon</span>
@@ -106,39 +112,48 @@
   </ul>
   <a class="nav-cta" href="index.html#submit">Submit a Project</a>
 </nav>
-
+ 
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="page-eyebrow">TRU Oregon · Community Projects</div>
-    <h1>Projects from the<br /><em>transect.</em></h1>
+    <h1>Projects from the<br /><em>corridor.</em></h1>
     <p>Community-submitted work on water, fire, climate, equity, and resilience — from Ashland to Portland and everywhere in between.</p>
   </div>
 </div>
-
-<div class="filter-bar">
-  <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" data-filter="all">All</button>
-  <div class="filter-sep"></div>
-  <button class="filter-btn" data-filter="Water">Water</button>
-  <button class="filter-btn" data-filter="Wildfire">Wildfire</button>
-  <button class="filter-btn" data-filter="Compounding">Compounding</button>
-  <button class="filter-btn" data-filter="Climate">Climate</button>
-  <button class="filter-btn" data-filter="Community Resilience">Resilience</button>
-  <button class="filter-btn" data-filter="Equity &amp; Access">Equity</button>
-  <button class="filter-btn" data-filter="Biodiversity">Biodiversity</button>
-  <button class="filter-btn" data-filter="Agriculture">Agriculture</button>
-  <button class="filter-btn" data-filter="Emergency Response">Emergency Response</button>
-  <button class="filter-btn" data-filter="Policy &amp; Governance">Policy</button>
-
-  <div class="filter-sep"></div>
-  <button class="filter-btn" data-filter="Storytelling">Storytelling</button>
-  <button class="filter-btn" data-filter="Place-Based Planning / Co-Production of Knowledge">Coproduction</button>
-  <button class="filter-btn" data-filter="Data Inventory / Gap">Data</button>
-  <button class="filter-btn" data-filter="Environmental Justice">Env. Justice</button>
-  <button class="filter-btn" data-filter="Public / Stakeholder Engagement with Science">Engagement</button>
-  <button class="filter-btn" data-filter="Restoration Economy">Restoration</button>
+ 
+<div class="filter-section">
+  <div class="filter-meta">
+    <span class="filter-meta-label" id="filter-meta-label">Filter projects</span>
+    <button class="filter-clear" id="filter-clear" onclick="clearFilters()">✕ Clear all filters</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-group-label">Issue Area</span>
+    <div class="filter-badges">
+      <button class="fbadge" data-filter="Water">Water</button>
+      <button class="fbadge" data-filter="Wildfire & Smoke">Wildfire &amp; Smoke</button>
+      <button class="fbadge" data-filter="Heat & Drought">Heat &amp; Drought</button>
+      <button class="fbadge" data-filter="Compounding Hazards">Compounding Hazards</button>
+      <button class="fbadge" data-filter="Community Resilience">Community Resilience</button>
+      <button class="fbadge" data-filter="Equity & Access">Equity &amp; Access</button>
+      <button class="fbadge" data-filter="Biodiversity">Biodiversity</button>
+      <button class="fbadge" data-filter="Agriculture">Agriculture</button>
+      <button class="fbadge" data-filter="Emergency Response">Emergency Response</button>
+      <button class="fbadge" data-filter="Policy & Governance">Policy &amp; Governance</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <span class="filter-group-label">Type of Work</span>
+    <div class="filter-badges">
+      <button class="fbadge" data-filter="Storytelling">Storytelling</button>
+      <button class="fbadge" data-filter="Place-Based Planning">Place-Based Planning</button>
+      <button class="fbadge" data-filter="Data Inventory">Data Inventory / Gap</button>
+      <button class="fbadge" data-filter="Public / Stakeholder Engagement">Public Engagement</button>
+      <button class="fbadge" data-filter="Environmental Justice">Environmental Justice</button>
+      <button class="fbadge" data-filter="Restoration Economy">Restoration Economy</button>
+    </div>
+  </div>
 </div>
-
+ 
 <div class="projects-wrap">
   <div class="projects-count" id="count"></div>
   <div class="projects-grid" id="grid">
@@ -148,7 +163,7 @@
     </div>
   </div>
 </div>
-
+ 
 <footer>
   <div class="footer-logo">TRU Oregon</div>
   <ul class="footer-links">
@@ -164,12 +179,12 @@
   <span>© 2026 TRU Oregon — Transect for Rural to Urban Oregon · SOU &amp; PSU</span>
   <span>Built for community · Hosted on GitHub Pages</span>
 </div>
-
+ 
 <script>
   const SHEET_ID  = '1SGcpZPguHhaTmYwrtLy1_0Ttz8R8uPycC01yVz-hn5o';
   const SHEET_GID = '1903097570';
   const CSV_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
-
+ 
   const ISSUE_TAG_CLASS = {
     'Water':'tag-water','Wildfire & Smoke':'tag-fire','Heat & Drought':'tag-hazard',
     'Compounding Hazards':'tag-hazard','Community Resilience':'tag-climate',
@@ -177,7 +192,7 @@
     'Agriculture & Food Systems':'tag-climate','Emergency Response':'tag-fire',
     'Policy & Governance':'tag-water','Climate Change':'tag-climate',
   };
-
+ 
   function parseCSV(text) {
     const lines = text.trim().split('\n');
     const headers = splitCSVLine(lines[0]);
@@ -188,7 +203,7 @@
       return obj;
     }).filter(r => r.project_title);
   }
-
+ 
   function splitCSVLine(line) {
     const result=[]; let cur='',inQuote=false;
     for(let i=0;i<line.length;i++){
@@ -199,10 +214,10 @@
     }
     result.push(cur); return result;
   }
-
+ 
   let allProjects = [];
-  let activeFilter = 'all';
-
+  let activeFilters = new Set(); // multi-select — empty means "show all"
+ 
   function buildCard(p) {
     const issues = p.issue_areas ? p.issue_areas.split(',').map(s=>s.trim()).filter(Boolean) : [];
     const tagsHTML = issues.slice(0,2).map(iss => {
@@ -230,44 +245,89 @@
         </div>
       </a>`;
   }
-
-  function filterMatches(p, f) {
-    if (f === 'all') return true;
+ 
+  // A project matches if it contains ALL active filters (AND logic within same group,
+  // but since badges are independent we use: project must match every active filter)
+  function projectMatches(p) {
+    if (activeFilters.size === 0) return true;
     const haystack = [p.issue_areas, p.work_types, p.location_primary, p.location_city]
       .join(' ').toLowerCase();
-    return haystack.includes(f.toLowerCase());
+    return [...activeFilters].every(f => haystack.includes(f.toLowerCase()));
   }
-
+ 
+  function updateMeta() {
+    const metaLabel  = document.getElementById('filter-meta-label');
+    const clearBtn   = document.getElementById('filter-clear');
+    const n = activeFilters.size;
+    if (n === 0) {
+      metaLabel.textContent = 'Filter projects';
+      clearBtn.classList.remove('visible');
+    } else {
+      const labels = [...activeFilters].join(' · ');
+      metaLabel.textContent = `Filtering by: ${labels}`;
+      clearBtn.classList.add('visible');
+    }
+  }
+ 
   function renderGrid() {
-    const grid = document.getElementById('grid');
-    const count = document.getElementById('count');
-    const filtered = allProjects.filter(p => filterMatches(p, activeFilter));
-
+    const grid    = document.getElementById('grid');
+    const count   = document.getElementById('count');
+    const filtered = allProjects.filter(projectMatches);
+ 
     if (!filtered.length) {
       grid.innerHTML = `
         <div class="empty-state">
-          <div class="empty-heading">No projects match this filter yet.</div>
+          <div class="empty-heading">No projects match these filters yet.</div>
           <p class="empty-sub">Be the first to submit work in this area along the TRU corridor.</p>
           <a class="btn-primary" href="index.html#submit">Submit Your Project →</a>
         </div>`;
       count.textContent = '';
     } else {
       grid.innerHTML = filtered.map(buildCard).join('');
-      count.textContent = `${filtered.length} project${filtered.length !== 1 ? 's' : ''}${activeFilter !== 'all' ? ` · filtered by "${activeFilter}"` : ''}`;
+      const total = allProjects.length;
+      count.textContent = activeFilters.size === 0
+        ? `${total} project${total !== 1 ? 's' : ''}`
+        : `${filtered.length} of ${total} project${total !== 1 ? 's' : ''}`;
     }
+    updateMeta();
   }
-
-  // Filter buttons
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+ 
+  function clearFilters() {
+    activeFilters.clear();
+    document.querySelectorAll('.fbadge').forEach(b => b.classList.remove('active'));
+    renderGrid();
+  }
+ 
+  // Badge toggle — clicking active badge deactivates it, clicking inactive adds it
+  document.querySelectorAll('.fbadge').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
+      const f = btn.dataset.filter;
+      if (activeFilters.has(f)) {
+        activeFilters.delete(f);
+        btn.classList.remove('active');
+      } else {
+        activeFilters.add(f);
+        btn.classList.add('active');
+      }
       renderGrid();
     });
   });
-
+ 
   async function init() {
+    // Pre-activate filter from URL param ?filter=Water
+    const urlFilter = new URLSearchParams(window.location.search).get('filter');
+    if (urlFilter) {
+      // Find the badge whose data-filter contains the URL param (case-insensitive partial match)
+      const match = [...document.querySelectorAll('.fbadge')].find(b =>
+        b.dataset.filter.toLowerCase().includes(urlFilter.toLowerCase()) ||
+        urlFilter.toLowerCase().includes(b.dataset.filter.toLowerCase())
+      );
+      if (match) {
+        activeFilters.add(match.dataset.filter);
+        match.classList.add('active');
+      }
+    }
+ 
     try {
       const res = await fetch(CSV_URL);
       if (!res.ok) throw new Error('Sheet fetch failed');
@@ -283,7 +343,7 @@
         </div>`;
     }
   }
-
+ 
   init();
 </script>
 </body>
