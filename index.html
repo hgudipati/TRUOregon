@@ -493,54 +493,132 @@
       <a class="btn-outline" href="#corridor-map">The Corridor</a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-map">
-      <svg class="landscape-svg" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0e0c0a"/>
-            <stop offset="60%" stop-color="#2b2824"/>
-            <stop offset="100%" stop-color="#3d3530"/>
-          </linearGradient>
-          <linearGradient id="smkGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#c4622d" stop-opacity="0.0"/>
-            <stop offset="45%" stop-color="#c4622d" stop-opacity="0.14"/>
-            <stop offset="100%" stop-color="#a07855" stop-opacity="0.03"/>
-          </linearGradient>
-        </defs>
-        <rect width="600" height="700" fill="url(#skyGrad)"/>
-        <g fill="rgba(242,237,230,0.6)">
-          <circle cx="48" cy="40" r="0.8"/><circle cx="122" cy="24" r="1.1"/><circle cx="195" cy="58" r="0.7"/>
-          <circle cx="308" cy="19" r="1.2"/><circle cx="398" cy="44" r="0.9"/><circle cx="508" cy="30" r="0.8"/>
-          <circle cx="552" cy="68" r="1.0"/><circle cx="80" cy="90" r="0.7"/><circle cx="168" cy="77" r="0.9"/>
-          <circle cx="262" cy="42" r="0.7"/><circle cx="372" cy="72" r="1.0"/><circle cx="448" cy="56" r="0.8"/>
-          <circle cx="32" cy="122" r="0.8"/><circle cx="150" cy="110" r="1.0"/><circle cx="338" cy="97" r="0.7"/>
-          <circle cx="518" cy="114" r="0.9"/><circle cx="280" cy="130" r="0.8"/>
-        </g>
-        <ellipse cx="300" cy="210" rx="330" ry="190" fill="url(#smkGrad)"/>
-        <path d="M0 370 L0 255 L45 218 L85 258 L115 195 L148 258 L185 228 L222 178 L265 238 L295 188 L332 228 L362 198 L402 258 L442 218 L485 258 L525 228 L562 268 L600 238 L600 370 Z" fill="#1a1815" opacity="0.95"/>
-        <path d="M0 420 L0 308 L62 278 L105 308 L142 268 L182 308 L235 282 L282 258 L325 292 L372 268 L422 292 L475 272 L535 292 L600 268 L600 420 Z" fill="#201e1c"/>
-        <!-- TRU corridor line -->
-        <path d="M135 582 C 162 552 195 512 225 472 C 258 428 283 386 302 340 C 322 294 342 255 368 215 C 390 180 415 152 442 132" fill="none" stroke="rgba(201,154,62,0.6)" stroke-width="2" stroke-dasharray="6 4"/>
-        <!-- SOU dot (Ashland) -->
-        <circle cx="135" cy="583" r="6" fill="#c4622d" opacity="0.9"/>
-        <circle cx="135" cy="583" r="13" fill="#c4622d" opacity="0.15"/>
-        <text x="154" y="580" font-family="monospace" font-size="8" fill="rgba(242,237,230,0.8)" letter-spacing="1.5">ASHLAND · SOU</text>
-        <!-- PSU dot (Portland) -->
-        <circle cx="442" cy="132" r="6" fill="#7aaabb" opacity="0.9"/>
-        <circle cx="442" cy="132" r="13" fill="#7aaabb" opacity="0.15"/>
-        <text x="458" y="129" font-family="monospace" font-size="8" fill="rgba(242,237,230,0.8)" letter-spacing="1.5">PORTLAND · PSU</text>
-        <path d="M0 502 C 100 492 200 512 300 498 C 400 484 500 500 600 490" fill="none" stroke="rgba(61,107,122,0.4)" stroke-width="2.5"/>
-        <path d="M0 700 L0 558 C 85 543 165 554 245 547 C 325 540 385 554 462 544 C 522 537 562 546 600 540 L600 700 Z" fill="#141210"/>
-        <ellipse cx="105" cy="548" rx="68" ry="28" fill="rgba(196,98,45,0.09)"/>
-        <rect x="192" y="334" width="142" height="38" fill="rgba(35,32,28,0.8)"/>
-        <text x="263" y="349" font-family="monospace" font-size="7" fill="rgba(201,154,62,0.9)" letter-spacing="2" text-anchor="middle">TRU TRANSECT</text>
-        <text x="263" y="362" font-family="monospace" font-size="7" fill="rgba(242,237,230,0.42)" letter-spacing="1" text-anchor="middle">280 MI · SOU → PSU</text>
-      </svg>
-    </div>
-    <div class="corridor-label">TRU Oregon · SOU Ashland ↔ PSU Portland · Climate Knowledge Corridor</div>
-  </div>
-</section>
+<!-- Leaflet CSS + JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Init terrain map in hero panel
+  (function() {
+    const map = L.map('hero-map', {
+      center: [44.2, -122.9],   // midpoint of Ashland–Portland corridor
+      zoom: 7,
+      zoomControl: false,
+      scrollWheelZoom: false,
+      dragging: false,
+      doubleClickZoom: false,
+      attributionControl: false,
+    });
+ 
+    // Stadia Stamen Terrain — no API key needed, open tiles
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', {
+      maxZoom: 18,
+      attribution: '&copy; Stadia Maps &copy; Stamen Design &copy; OpenMapTiles &copy; OpenStreetMap'
+    }).addTo(map);
+ 
+    // TRU corridor waypoints (Ashland → Medford → Grants Pass → Roseburg → Eugene → Salem → Portland)
+    const corridor = [
+      [42.1954, -122.7095],   // Ashland (SOU)
+      //[42.3265, -122.8756],   // Medford
+      //[42.4390, -123.3284],   // Grants Pass
+     // [43.2165, -123.3417],   // Roseburg
+     // [44.0521, -123.0868],   // Eugene
+     // [44.9429, -123.0351],   // Salem
+      [45.5051, -122.6750],   // Portland (PSU)
+    ];
+ 
+    // Gold dashed corridor line
+    L.polyline(corridor, {
+      color: '#c99a3e',
+      weight: 3,
+      opacity: 0.85,
+      dashArray: '8 5',
+    }).addTo(map);
+ 
+    // Custom marker factory
+    function makeMarker(latlng, color, label, subLabel) {
+      const el = L.divIcon({
+        className: '',
+        html: `
+          <div style="position:relative;">
+            <div style="
+              width:12px;height:12px;border-radius:50%;
+              background:${color};border:2px solid rgba(242,237,230,0.9);
+              box-shadow:0 0 0 4px ${color}33;
+            "></div>
+            <div style="
+              position:absolute;left:18px;top:-4px;
+              background:rgba(43,40,36,0.88);
+              padding:3px 7px;white-space:nowrap;
+              font-family:monospace;font-size:9px;
+              letter-spacing:1.2px;text-transform:uppercase;
+              color:rgba(242,237,230,0.92);pointer-events:none;
+            ">${label}${subLabel ? `<span style='color:${color};margin-left:4px;'>${subLabel}</span>` : ''}</div>
+          </div>`,
+        iconAnchor: [6, 6],
+      });
+      return L.marker(latlng, { icon: el });
+    }
+ 
+    // Anchor city markers
+    makeMarker([42.1954, -122.7095], '#c4622d', 'Ashland', '· SOU').addTo(map);
+    makeMarker([45.5051, -122.6750], '#7aaabb', 'Portland', '· PSU').addTo(map);
+ 
+    // Waypoint dots (smaller)
+    [
+      [[42.3265, -122.8756], 'Medford'],
+      [[42.4390, -123.3284], 'Grants Pass'],
+      [[43.2165, -123.3417], 'Roseburg'],
+      [[44.0521, -123.0868], 'Eugene'],
+      [[44.9429, -123.0351], 'Salem'],
+    ].forEach(([latlng, name]) => {
+      L.circleMarker(latlng, {
+        radius: 4,
+        fillColor: '#c99a3e',
+        color: 'rgba(242,237,230,0.7)',
+        weight: 1.5,
+        fillOpacity: 0.9,
+      }).bindTooltip(name, {
+        permanent: false,
+        direction: 'right',
+        className: 'tru-tooltip',
+      }).addTo(map);
+    });
+ 
+    // Small Leaflet attribution in corner
+    L.control.attribution({ position: 'bottomright', prefix: false })
+      .addAttribution('© <a href="https://stadiamaps.com">Stadia</a> © <a href="https://stamen.com">Stamen</a>')
+      .addTo(map);
+  })();
+</script>
+<style>
+  #hero-map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: saturate(0.7) brightness(0.72) sepia(0.18);
+  }
+  .tru-tooltip {
+    background: rgba(43,40,36,0.88) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-family: monospace !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: rgba(242,237,230,0.85) !important;
+    box-shadow: none !important;
+    padding: 3px 7px !important;
+  }
+  .tru-tooltip::before { display: none !important; }
+  .leaflet-attribution-flag { display: none !important; }
+  .leaflet-control-attribution {
+    background: rgba(43,40,36,0.7) !important;
+    color: rgba(242,237,230,0.35) !important;
+    font-size: 9px !important;
+  }
+  .leaflet-control-attribution a { color: rgba(242,237,230,0.45) !important; }
+</style>
 
 <!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
