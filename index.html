@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rogue to River — Ashland ↔ Portland Climate Corridor</title>
+  <title>TRU Oregon — Transect for Rural to Urban Oregon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Baskerville:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -21,6 +21,1001 @@
       --parchment: #e8e0d4;
       --ember:     #c4622d;
       --gold:      #c99a3e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ash);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(242,237,230,0.93);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(107,92,78,0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: var(--ash);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-logo-main { color: var(--ash); }
+    .nav-logo-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ember); }
+    .nav-unis {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .uni-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.38rem 0.8rem;
+      border: 1px solid var(--bark);
+      color: var(--smoke);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .uni-badge.sou { border-color: var(--ember); color: var(--ember); }
+    .uni-badge.psu { border-color: var(--river); color: var(--river); }
+    .uni-badge:hover { background: var(--ash); color: var(--cream); border-color: var(--ash); }
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--ember);
+      color: #fff;
+      padding: 0.52rem 1.2rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-left: 0.8rem;
+    }
+    .nav-cta:hover { background: var(--clay); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 68px;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+    }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fern);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--fern); }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 0.6rem;
+    }
+    .hero-title em { font-style: italic; color: var(--ember); }
+    .hero-acronym {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1.8rem;
+      padding-left: 2px;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--smoke);
+      max-width: 460px;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .hero-partners {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-partners-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bark);
+    }
+    .partner-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 0;
+    }
+    .pill-sou { background: rgba(196,98,45,0.12); color: var(--ember); border: 1px solid rgba(196,98,45,0.3); }
+    .pill-psu { background: rgba(61,107,122,0.12); color: var(--river); border: 1px solid rgba(61,107,122,0.3); }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--ash); color: var(--cream);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Mono', monospace; font-size: 0.73rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border: 2px solid var(--ash);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-primary:hover { background: var(--ember); border-color: var(--ember); }
+    .btn-outline {
+      background: transparent; color: var(--ash);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Mono', monospace; font-size: 0.73rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border: 2px solid var(--ash);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--ash); color: var(--cream); }
+    .hero-right {
+      position: relative;
+      background: var(--ash);
+      overflow: hidden;
+    }
+    .hero-map { position: absolute; inset: 0; }
+    .landscape-svg { width: 100%; height: 100%; }
+    .corridor-label {
+      position: absolute; bottom: 2rem; left: 2rem; right: 2rem;
+      font-family: 'DM Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(242,237,230,0.38);
+      border-top: 1px solid rgba(242,237,230,0.1);
+      padding-top: 0.8rem;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap { background: var(--fern); color: var(--cream); padding: 0.7rem 0; overflow: hidden; white-space: nowrap; }
+    .ticker-inner { display: inline-block; animation: ticker 34s linear infinite; }
+    .ticker-item {
+      display: inline-block;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.14em; text-transform: uppercase; padding: 0 3rem;
+    }
+    .ticker-item::after { content: '◆'; margin-left: 3rem; opacity: 0.35; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── PREMISE ── */
+    .premise { display: grid; grid-template-columns: 1fr 2fr; border-bottom: 1px solid var(--parchment); }
+    .premise-sidebar { background: var(--ash); color: var(--cream); padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .premise-tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.5rem; }
+    .premise-sidebar h2 { font-family: 'Playfair Display', serif; font-size: 2rem; line-height: 1.2; font-weight: 700; margin-bottom: 1.5rem; }
+    .premise-sidebar h2 em { font-style: italic; color: var(--gold); }
+    .premise-sidebar p { font-size: 0.88rem; color: rgba(242,237,230,0.68); line-height: 1.85; }
+    .premise-main { padding: 5rem; display: flex; flex-direction: column; justify-content: center; }
+    .premise-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-style: italic; font-weight: 700; line-height: 1.45;
+      border-left: 4px solid var(--ember); padding-left: 2rem; margin-bottom: 2.5rem;
+    }
+    .premise-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .premise-body p { color: var(--smoke); font-size: 0.93rem; }
+
+    /* ── ISSUES ── */
+    .issues-section { padding: 6rem 5rem; background: var(--parchment); }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; border-bottom: 1px solid var(--bark); padding-bottom: 1rem; }
+    .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; }
+    .section-header a { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ember); text-decoration: none; }
+    .issues-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--bark); }
+    .issue-card { padding: 2rem 1.5rem; border-right: 1px solid var(--bark); text-decoration: none; color: inherit; display: block; transition: background 0.25s; }
+    .issue-card:last-child { border-right: none; }
+    .issue-card:hover { background: var(--ash); }
+    .issue-card:hover .issue-name, .issue-card:hover .issue-desc { color: var(--cream); }
+    .issue-card:hover .issue-accent { background: var(--ember); }
+    .issue-accent { width: 2.5rem; height: 3px; background: var(--clay); margin-bottom: 1.2rem; transition: background 0.25s; }
+    .issue-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+    .issue-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--ash); margin-bottom: 0.5rem; transition: color 0.25s; }
+    .issue-desc { font-size: 0.78rem; color: var(--smoke); line-height: 1.6; transition: color 0.25s; }
+
+    /* ── PROJECTS ── */
+    .projects-section { padding: 6rem 5rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .project-card { background: var(--parchment); border: 1px solid rgba(107,92,78,0.25); transition: transform 0.25s, box-shadow 0.25s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(43,40,36,0.1); }
+    .project-tag-row { display: flex; gap: 0.5rem; padding: 1.2rem 1.5rem 0; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.6rem; }
+    .tag-water  { background: #ddeef3; color: var(--river); }
+    .tag-fire   { background: #f5e2d6; color: var(--ember); }
+    .tag-climate{ background: #dde8dd; color: var(--fern); }
+    .tag-hazard { background: #f0e8d0; color: var(--clay); }
+    .project-body { padding: 1rem 1.5rem 1.5rem; flex: 1; }
+    .project-city { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+    .project-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ash); margin-bottom: 0.6rem; line-height: 1.3; }
+    .project-desc { font-size: 0.84rem; color: var(--smoke); line-height: 1.7; }
+    .project-footer { border-top: 1px solid rgba(107,92,78,0.2); padding: 0.9rem 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bark); display: flex; align-items: center; justify-content: space-between; }
+    .learn-arrow { color: var(--ember); }
+
+    /* ── SUBMIT ── */
+    .submit-section { background: var(--ash); color: var(--cream); padding: 6rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .submit-left h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem; }
+    .submit-left h2 em { font-style: italic; color: var(--gold); }
+    .submit-left p { font-size: 0.93rem; color: rgba(242,237,230,0.72); margin-bottom: 2rem; line-height: 1.8; }
+    .submit-steps { list-style: none; margin-bottom: 2.5rem; }
+    .submit-steps li { display: flex; gap: 1rem; align-items: flex-start; padding: 0.8rem 0; border-bottom: 1px solid rgba(242,237,230,0.1); font-size: 0.87rem; color: rgba(242,237,230,0.78); }
+    .step-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gold); background: rgba(201,154,62,0.15); padding: 0.2rem 0.5rem; min-width: 2rem; text-align: center; margin-top: 0.15rem; }
+    .btn-gold { display: inline-block; background: var(--gold); color: var(--ash); padding: 1rem 2.5rem; font-family: 'DM Mono', monospace; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background 0.2s, color 0.2s; }
+    .btn-gold:hover { background: var(--clay); color: var(--cream); }
+    .submit-right { background: rgba(242,237,230,0.05); border: 1px solid rgba(242,237,230,0.12); padding: 2.5rem; }
+    .submit-right h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 1.5rem; color: var(--cream); }
+    .submit-right h4 { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,237,230,0.45); margin-bottom: 0.8rem; }
+    .categories { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .cat-badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.38rem 0.85rem; border: 1px solid rgba(242,237,230,0.22); color: rgba(242,237,230,0.65); cursor: pointer; transition: all 0.2s; }
+    .cat-badge:hover, .cat-badge.active { border-color: var(--gold); color: var(--gold); background: rgba(201,154,62,0.08); }
+    .data-note { font-size: 0.76rem; color: rgba(242,237,230,0.38); line-height: 1.75; border-top: 1px solid rgba(242,237,230,0.1); padding-top: 1.2rem; font-style: italic; }
+
+    /* ── STATS BAND ── */
+    .map-band { background: var(--fern); padding: 3rem 5rem; display: flex; align-items: center; gap: 4rem; }
+    .map-band-text { color: var(--cream); flex: 1; }
+    .map-band-text h3 { font-family: 'Playfair Display', serif; font-size: 1.55rem; margin-bottom: 0.7rem; }
+    .map-band-text p { font-size: 0.86rem; opacity: 0.75; max-width: 360px; }
+    .map-band-stat { text-align: center; color: var(--cream); }
+    .map-band-stat .big { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; line-height: 1; color: var(--gold); }
+    .map-band-stat .label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.6; margin-top: 0.3rem; }
+    .map-divider { width: 1px; height: 4.5rem; background: rgba(242,237,230,0.18); }
+
+    /* ── CORRIDOR MAP ── */
+    .corridor-map-section { padding: 6rem 5rem; background: var(--cream); }
+    .map-intro { max-width: 580px; color: var(--smoke); font-size: 0.93rem; margin-bottom: 2.5rem; line-height: 1.8; }
+    .map-layout { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
+    .map-svg-wrap { position: relative; background: #1a2a1e; border: 1px solid rgba(107,92,78,0.3); overflow: hidden; }
+    #corridorSVG { width: 100%; display: block; }
+    .city-dot { cursor: pointer; }
+    .city-dot circle { transition: r 0.15s; }
+    .city-dot:hover circle { r: 9; }
+    .map-tooltip {
+      position: absolute;
+      background: var(--cream);
+      border: 1px solid var(--bark);
+      border-left: 3px solid var(--ember);
+      padding: 0.9rem 1.1rem;
+      font-size: 0.82rem;
+      width: 200px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      z-index: 10;
+      box-shadow: 0 4px 18px rgba(43,40,36,0.18);
+    }
+    .map-tooltip.visible { opacity: 1; }
+    .map-tooltip strong { font-family: 'Playfair Display', serif; font-size: 0.95rem; display: block; margin-bottom: 0.2rem; }
+    .map-tooltip .tt-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ember); margin-bottom: 0.4rem; display: block; }
+    .map-tooltip p { color: var(--smoke); line-height: 1.5; font-size: 0.8rem; }
+    /* sidebar */
+    .map-legend { background: var(--parchment); border: 1px solid rgba(107,92,78,0.2); padding: 1.4rem; margin-bottom: 1.2rem; }
+    .map-legend h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bark); margin-bottom: 1rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; font-size: 0.8rem; color: var(--smoke); }
+    .legend-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+    .legend-line { width: 22px; height: 2px; flex-shrink: 0; }
+    .map-city-list { background: var(--parchment); border: 1px solid rgba(107,92,78,0.2); }
+    .city-list-item { padding: 0.8rem 1.1rem; border-bottom: 1px solid rgba(107,92,78,0.12); cursor: pointer; transition: background 0.15s; display: flex; align-items: center; gap: 0.7rem; }
+    .city-list-item:last-child { border-bottom: none; }
+    .city-list-item:hover { background: rgba(107,92,78,0.08); }
+    .city-list-item.active { background: var(--ash); }
+    .city-list-item.active .cli-name, .city-list-item.active .cli-sub { color: var(--cream); }
+    .cli-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .cli-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--ash); }
+    .cli-sub { font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); }
+    .map-info-panel { background: var(--parchment); border: 1px solid rgba(107,92,78,0.2); padding: 1.4rem; margin-top: 1.2rem; min-height: 120px; }
+    .map-info-panel h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ash); margin-bottom: 0.4rem; }
+    .map-info-panel .info-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ember); margin-bottom: 0.6rem; display: block; }
+    .map-info-panel p { font-size: 0.8rem; color: var(--smoke); line-height: 1.65; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter { background: var(--parchment); border-top: 4px solid var(--sage); padding: 4rem 5rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+    .newsletter-text h3 { font-family: 'Playfair Display', serif; font-size: 1.55rem; margin-bottom: 0.4rem; }
+    .newsletter-text p { font-size: 0.87rem; color: var(--smoke); }
+    .newsletter-form { display: flex; flex: 1; max-width: 460px; }
+    .newsletter-form input { flex: 1; padding: 0.88rem 1.2rem; border: 2px solid var(--bark); border-right: none; background: var(--cream); font-family: 'Libre Baskerville', serif; font-size: 0.9rem; color: var(--ash); outline: none; }
+    .newsletter-form input:focus { border-color: var(--fern); }
+    .newsletter-form button { background: var(--fern); color: var(--cream); border: 2px solid var(--fern); padding: 0.88rem 1.7rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .newsletter-form button:hover { background: var(--ash); border-color: var(--ash); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ash); color: rgba(242,237,230,0.55); padding: 3.5rem 5rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+    .footer-brand { }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--cream); margin-bottom: 0.2rem; }
+    .footer-logo-sub { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.8rem; line-height: 1.75; max-width: 260px; margin-bottom: 1.2rem; }
+    .footer-uni-row { display: flex; gap: 0.5rem; }
+    .footer-uni { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border: 1px solid rgba(242,237,230,0.15); color: rgba(242,237,230,0.45); }
+    .footer-col h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.5rem; }
+    .footer-col a { font-size: 0.82rem; color: rgba(242,237,230,0.48); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom { background: var(--ash); border-top: 1px solid rgba(242,237,230,0.07); padding: 1.1rem 5rem; display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,230,0.25); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.22s; }
+    .fade-up-delay-3 { transition-delay: 0.34s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-unis { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 3rem 1.5rem; }
+      .premise { grid-template-columns: 1fr; }
+      .premise-main { padding: 3rem 1.5rem; }
+      .premise-body { grid-template-columns: 1fr; }
+      .issues-grid { grid-template-columns: repeat(2, 1fr); }
+      .issue-card { border-bottom: 1px solid var(--bark); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .projects-section, .issues-section, .corridor-map-section { padding: 4rem 1.5rem; }
+      .submit-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      .map-band { flex-wrap: wrap; padding: 2.5rem 1.5rem; gap: 2rem; }
+      .map-layout { grid-template-columns: 1fr; }
+      .newsletter { flex-direction: column; padding: 3rem 1.5rem; }
+      .newsletter-form { max-width: 100%; width: 100%; }
+      footer { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; }
+      .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-main">TRU Oregon</span>
+    <span class="nav-logo-sub">Transect · Rural to Urban</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#issues">Issues</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#corridor-map">The Corridor</a></li>
+    <li><a href="team.html">Community</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-unis">
+    <a class="uni-badge sou" href="https://sou.edu" target="_blank">SOU</a>
+    <a class="uni-badge psu" href="https://pdx.edu" target="_blank">PSU</a>
+    <a class="nav-cta" href="#submit">Submit a Project</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-up">Transect for Rural to Urban Oregon</div>
+    <h1 class="hero-title fade-up fade-up-delay-1">
+      Ashland is Portland<br /><em>in 20 years.</em>
+    </h1>
+    <p class="hero-acronym fade-up fade-up-delay-1">TRU — where the transect begins.</p>
+    <p class="hero-subtitle fade-up fade-up-delay-2">
+      A partnership between Southern Oregon University and Portland State University,
+      TRU Oregon connects rural Ashland's hard-won climate lessons with Portland's future —
+      amplifying community voices and building resilience across 280 miles of corridor.
+    </p>
+    <div class="hero-partners fade-up fade-up-delay-2">
+      <span class="hero-partners-label">A partnership of</span>
+      <span class="partner-pill pill-sou">Southern Oregon University</span>
+      <span class="partner-pill pill-psu">Portland State University</span>
+    </div>
+    <div class="hero-buttons fade-up fade-up-delay-3">
+      <a class="btn-primary" href="#projects">Explore Projects</a>
+      <a class="btn-outline" href="#corridor-map">The Corridor</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-map">
+      <svg class="landscape-svg" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0e0c0a"/>
+            <stop offset="60%" stop-color="#2b2824"/>
+            <stop offset="100%" stop-color="#3d3530"/>
+          </linearGradient>
+          <linearGradient id="smkGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c4622d" stop-opacity="0.0"/>
+            <stop offset="45%" stop-color="#c4622d" stop-opacity="0.14"/>
+            <stop offset="100%" stop-color="#a07855" stop-opacity="0.03"/>
+          </linearGradient>
+        </defs>
+        <rect width="600" height="700" fill="url(#skyGrad)"/>
+        <g fill="rgba(242,237,230,0.6)">
+          <circle cx="48" cy="40" r="0.8"/><circle cx="122" cy="24" r="1.1"/><circle cx="195" cy="58" r="0.7"/>
+          <circle cx="308" cy="19" r="1.2"/><circle cx="398" cy="44" r="0.9"/><circle cx="508" cy="30" r="0.8"/>
+          <circle cx="552" cy="68" r="1.0"/><circle cx="80" cy="90" r="0.7"/><circle cx="168" cy="77" r="0.9"/>
+          <circle cx="262" cy="42" r="0.7"/><circle cx="372" cy="72" r="1.0"/><circle cx="448" cy="56" r="0.8"/>
+          <circle cx="32" cy="122" r="0.8"/><circle cx="150" cy="110" r="1.0"/><circle cx="338" cy="97" r="0.7"/>
+          <circle cx="518" cy="114" r="0.9"/><circle cx="280" cy="130" r="0.8"/>
+        </g>
+        <ellipse cx="300" cy="210" rx="330" ry="190" fill="url(#smkGrad)"/>
+        <path d="M0 370 L0 255 L45 218 L85 258 L115 195 L148 258 L185 228 L222 178 L265 238 L295 188 L332 228 L362 198 L402 258 L442 218 L485 258 L525 228 L562 268 L600 238 L600 370 Z" fill="#1a1815" opacity="0.95"/>
+        <path d="M0 420 L0 308 L62 278 L105 308 L142 268 L182 308 L235 282 L282 258 L325 292 L372 268 L422 292 L475 272 L535 292 L600 268 L600 420 Z" fill="#201e1c"/>
+        <!-- TRU corridor line -->
+        <path d="M135 582 C 162 552 195 512 225 472 C 258 428 283 386 302 340 C 322 294 342 255 368 215 C 390 180 415 152 442 132" fill="none" stroke="rgba(201,154,62,0.6)" stroke-width="2" stroke-dasharray="6 4"/>
+        <!-- SOU dot (Ashland) -->
+        <circle cx="135" cy="583" r="6" fill="#c4622d" opacity="0.9"/>
+        <circle cx="135" cy="583" r="13" fill="#c4622d" opacity="0.15"/>
+        <text x="154" y="580" font-family="monospace" font-size="8" fill="rgba(242,237,230,0.8)" letter-spacing="1.5">ASHLAND · SOU</text>
+        <!-- PSU dot (Portland) -->
+        <circle cx="442" cy="132" r="6" fill="#7aaabb" opacity="0.9"/>
+        <circle cx="442" cy="132" r="13" fill="#7aaabb" opacity="0.15"/>
+        <text x="458" y="129" font-family="monospace" font-size="8" fill="rgba(242,237,230,0.8)" letter-spacing="1.5">PORTLAND · PSU</text>
+        <path d="M0 502 C 100 492 200 512 300 498 C 400 484 500 500 600 490" fill="none" stroke="rgba(61,107,122,0.4)" stroke-width="2.5"/>
+        <path d="M0 700 L0 558 C 85 543 165 554 245 547 C 325 540 385 554 462 544 C 522 537 562 546 600 540 L600 700 Z" fill="#141210"/>
+        <ellipse cx="105" cy="548" rx="68" ry="28" fill="rgba(196,98,45,0.09)"/>
+        <rect x="192" y="334" width="142" height="38" fill="rgba(35,32,28,0.8)"/>
+        <text x="263" y="349" font-family="monospace" font-size="7" fill="rgba(201,154,62,0.9)" letter-spacing="2" text-anchor="middle">TRU TRANSECT</text>
+        <text x="263" y="362" font-family="monospace" font-size="7" fill="rgba(242,237,230,0.42)" letter-spacing="1" text-anchor="middle">280 MI · SOU → PSU</text>
+      </svg>
+    </div>
+    <div class="corridor-label">TRU Oregon · SOU Ashland ↔ PSU Portland · Climate Knowledge Corridor</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Water Scarcity</span>
+    <span class="ticker-item">Wildfire Smoke</span>
+    <span class="ticker-item">Compounding Hazards</span>
+    <span class="ticker-item">Drought &amp; Heat</span>
+    <span class="ticker-item">Environmental Justice</span>
+    <span class="ticker-item">Rural Resilience</span>
+    <span class="ticker-item">SOU ↔ PSU</span>
+    <span class="ticker-item">Climate Adaptation</span>
+    <span class="ticker-item">Restoration Economy</span>
+    <span class="ticker-item">Community Science</span>
+    <span class="ticker-item">Water Scarcity</span>
+    <span class="ticker-item">Wildfire Smoke</span>
+    <span class="ticker-item">Compounding Hazards</span>
+    <span class="ticker-item">Drought &amp; Heat</span>
+    <span class="ticker-item">Environmental Justice</span>
+    <span class="ticker-item">Rural Resilience</span>
+    <span class="ticker-item">SOU ↔ PSU</span>
+    <span class="ticker-item">Climate Adaptation</span>
+    <span class="ticker-item">Restoration Economy</span>
+    <span class="ticker-item">Community Science</span>
+  </div>
+</div>
+
+<!-- PREMISE -->
+<section class="premise">
+  <div class="premise-sidebar fade-up">
+    <div class="premise-tag">What is TRU?</div>
+    <h2>A transect from<br /><em>rural to urban</em></h2>
+    <p>TRU Oregon is a research and community platform co-led by Southern Oregon University (SOU) and Portland State University (PSU). The transect runs 280 miles — from Ashland's Siskiyou foothills to Portland's Willamette riverfront — tracing Oregon's climate future in real time.</p>
+  </div>
+  <div class="premise-main">
+    <blockquote class="premise-quote fade-up">
+      Climate change doesn't arrive everywhere at once. The rural communities at the edge see it first — and their knowledge is a blueprint for what's coming to Oregon's cities.
+    </blockquote>
+    <div class="premise-body">
+      <p class="fade-up">Ashland sits at the southern end of the TRU transect and at the frontier of Oregon's climate crisis: longer fire seasons, declining snowpack, drought-stressed watersheds, and compounding emergencies that are already reshaping daily life in the Rogue Valley.</p>
+      <p class="fade-up fade-up-delay-1">Portland is tracking toward similar conditions within two decades. By connecting SOU's rural knowledge with PSU's urban research, the TRU corridor compresses learning timelines and builds more equitable, community-grounded responses to the challenges ahead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ISSUES -->
+<section class="issues-section" id="issues">
+  <div class="section-header fade-up">
+    <h2>Issues</h2>
+    <a href="#">View all →</a>
+  </div>
+  <div class="issues-grid">
+    <a class="issue-card fade-up" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">💧</span>
+      <div class="issue-name">Water</div>
+      <div class="issue-desc">Snowpack loss, Rogue River flows, drought policy, and watershed equity.</div>
+    </a>
+    <a class="issue-card fade-up fade-up-delay-1" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">🔥</span>
+      <div class="issue-name">Fire</div>
+      <div class="issue-desc">Wildfire risk, smoke health impacts, evacuation planning, and defensible space.</div>
+    </a>
+    <a class="issue-card fade-up fade-up-delay-2" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">⚠️</span>
+      <div class="issue-name">Compounding Hazards</div>
+      <div class="issue-desc">When drought, heat, fire, and flood converge — and systems fail together.</div>
+    </a>
+    <a class="issue-card fade-up fade-up-delay-3" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">🌡️</span>
+      <div class="issue-name">Climate Change</div>
+      <div class="issue-desc">Long-term shifts in temperature, precipitation, and seasonal patterns across the transect.</div>
+    </a>
+    <a class="issue-card fade-up" href="#">
+      <div class="issue-accent"></div>
+      <span class="issue-icon">🤝</span>
+      <div class="issue-name">Equity</div>
+      <div class="issue-desc">Who bears the burden of climate impacts, and who has access to resources and recovery.</div>
+    </a>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-header fade-up">
+    <h2>Featured Projects</h2>
+    <a href="#">All projects →</a>
+  </div>
+  <div class="projects-grid">
+    <a class="project-card fade-up" href="#">
+      <div class="project-tag-row">
+        <span class="tag tag-water">Water</span>
+        <span class="tag tag-climate">Climate</span>
+      </div>
+      <div class="project-body">
+        <div class="project-city">SOU · Ashland, OR</div>
+        <div class="project-title">Crowdsourcing Snowpack Memory in Bear Creek Watershed</div>
+        <div class="project-desc">Community volunteers track seasonal snowpack decline using historical photo archives and current measurements — building a 40-year dataset no agency has compiled.</div>
+      </div>
+      <div class="project-footer"><span>Water · Community Science</span><span class="learn-arrow">→</span></div>
+    </a>
+    <a class="project-card fade-up fade-up-delay-1" href="#">
+      <div class="project-tag-row">
+        <span class="tag tag-fire">Fire</span>
+        <span class="tag tag-hazard">Compounding</span>
+      </div>
+      <div class="project-body">
+        <div class="project-city">PSU · Portland, OR</div>
+        <div class="project-title">Smoke Season Preparedness: What Ashland Figured Out</div>
+        <div class="project-desc">A cross-city policy brief adapting Ashland's air quality response playbook for Portland's denser, more vulnerable neighborhoods — written with SOU partners.</div>
+      </div>
+      <div class="project-footer"><span>Fire · Policy</span><span class="learn-arrow">→</span></div>
+    </a>
+    <a class="project-card fade-up fade-up-delay-2" href="#">
+      <div class="project-tag-row">
+        <span class="tag tag-climate">Climate</span>
+        <span class="tag tag-hazard">Equity</span>
+      </div>
+      <div class="project-body">
+        <div class="project-city">TRU Corridor · SOU–PSU</div>
+        <div class="project-title">Heat Vulnerability Index for Rural Oregon Communities</div>
+        <div class="project-desc">Mapping which communities along the I-5 transect face the greatest heat exposure with the fewest resources — and who the state is missing.</div>
+      </div>
+      <div class="project-footer"><span>Climate · Equity · Data</span><span class="learn-arrow">→</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="map-band">
+  <div class="map-band-text fade-up">
+    <h3>One transect. Two universities. One climate future.</h3>
+    <p>SOU in Ashland anchors the rural end. PSU in Portland anchors the urban end. Together they span Oregon's full climate spectrum.</p>
+  </div>
+  <div class="map-divider"></div>
+  <div class="map-band-stat fade-up fade-up-delay-1"><div class="big">280</div><div class="label">Miles of transect</div></div>
+  <div class="map-divider"></div>
+  <div class="map-band-stat fade-up fade-up-delay-2"><div class="big">2</div><div class="label">University partners</div></div>
+  <div class="map-divider"></div>
+  <div class="map-band-stat fade-up fade-up-delay-3"><div class="big">20°</div><div class="label">Warmer summers ahead</div></div>
+</div>
+
+<!-- CORRIDOR MAP -->
+<section class="corridor-map-section" id="corridor-map">
+  <div class="section-header fade-up">
+    <h2>The TRU Corridor</h2>
+    <a href="#">Full map →</a>
+  </div>
+  <p class="map-intro fade-up">The transect runs from SOU in Ashland through Medford, Grants Pass, Roseburg, Eugene, Salem, and into Portland at PSU. Click any city to learn about the climate issues and projects active in that community.</p>
+
+  <div class="map-layout">
+    <div class="map-svg-wrap fade-up">
+      <svg id="corridorSVG" viewBox="0 0 640 820" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a2a1e"/>
+            <stop offset="100%" stop-color="#111a14"/>
+          </linearGradient>
+          <!-- Oregon shape (simplified) -->
+          <clipPath id="oregonClip">
+            <path d="M60 40 L580 40 L600 120 L590 200 L580 300 L575 400 L570 500 L560 600 L400 780 L200 780 L80 680 L60 560 L50 400 L55 200 Z"/>
+          </clipPath>
+        </defs>
+
+        <!-- Background -->
+        <rect width="640" height="820" fill="url(#bgGrad)"/>
+
+        <!-- Oregon terrain texture (subtle grid) -->
+        <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+          <line x1="0" y1="100" x2="640" y2="100"/>
+          <line x1="0" y1="200" x2="640" y2="200"/>
+          <line x1="0" y1="300" x2="640" y2="300"/>
+          <line x1="0" y1="400" x2="640" y2="400"/>
+          <line x1="0" y1="500" x2="640" y2="500"/>
+          <line x1="0" y1="600" x2="640" y2="600"/>
+          <line x1="0" y1="700" x2="640" y2="700"/>
+          <line x1="100" y1="0" x2="100" y2="820"/>
+          <line x1="200" y1="0" x2="200" y2="820"/>
+          <line x1="320" y1="0" x2="320" y2="820"/>
+          <line x1="440" y1="0" x2="440" y2="820"/>
+          <line x1="540" y1="0" x2="540" y2="820"/>
+        </g>
+
+        <!-- Oregon state outline (rough) -->
+        <path d="M90 55 L565 55 L580 110 L572 180 L565 290 L558 400 L552 510 L545 610 L390 770 L220 770 L100 670 L82 560 L72 400 L76 200 Z"
+          fill="rgba(61,107,122,0.07)" stroke="rgba(61,107,122,0.3)" stroke-width="1.5"/>
+
+        <!-- Cascade mountain range hint (west side) -->
+        <path d="M130 55 L130 400 L145 420 L130 450 L140 500 L125 550 L135 620 L120 680 L130 770"
+          fill="none" stroke="rgba(122,140,110,0.2)" stroke-width="1.5" stroke-dasharray="4 6"/>
+
+        <!-- Willamette Valley label zone -->
+        <text x="210" y="200" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.3)" letter-spacing="3" text-anchor="middle">WILLAMETTE VALLEY</text>
+        <text x="340" y="620" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.25)" letter-spacing="2" text-anchor="middle">ROGUE VALLEY</text>
+
+        <!-- I-5 / TRU corridor route -->
+        <path id="corridorPath"
+          d="M295 750 C 300 720 305 690 308 660 C 312 625 318 600 322 570 C 328 535 335 508 340 478 C 346 445 348 415 350 385 C 353 350 355 318 356 285 C 357 255 356 225 354 195 C 352 165 348 138 344 112 C 340 88 335 68 330 55"
+          fill="none" stroke="rgba(201,154,62,0.25)" stroke-width="3"/>
+
+        <!-- Animated pulse on the corridor -->
+        <path
+          d="M295 750 C 300 720 305 690 308 660 C 312 625 318 600 322 570 C 328 535 335 508 340 478 C 346 445 348 415 350 385 C 353 350 355 318 356 285 C 357 255 356 225 354 195 C 352 165 348 138 344 112 C 340 88 335 68 330 55"
+          fill="none" stroke="rgba(201,154,62,0.55)" stroke-width="1.5" stroke-dasharray="8 6">
+          <animate attributeName="stroke-dashoffset" from="200" to="0" dur="4s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- CITY DOTS — north to south -->
+
+        <!-- Portland / PSU -->
+        <g class="city-dot" data-city="portland" onclick="selectCity('portland')">
+          <circle cx="330" cy="58" r="7" fill="#7aaabb" opacity="0.9"/>
+          <circle cx="330" cy="58" r="14" fill="#7aaabb" opacity="0.12"/>
+          <text x="350" y="55" font-family="monospace" font-size="9" fill="rgba(122,170,187,0.9)" letter-spacing="1.2">PORTLAND</text>
+          <text x="350" y="66" font-family="monospace" font-size="7" fill="rgba(122,170,187,0.55)" letter-spacing="1">PSU</text>
+        </g>
+
+        <!-- Salem -->
+        <g class="city-dot" data-city="salem" onclick="selectCity('salem')">
+          <circle cx="340" cy="195" r="5" fill="rgba(201,154,62,0.7)"/>
+          <circle cx="340" cy="195" r="10" fill="rgba(201,154,62,0.1)"/>
+          <text x="358" y="199" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">SALEM</text>
+        </g>
+
+        <!-- Eugene -->
+        <g class="city-dot" data-city="eugene" onclick="selectCity('eugene')">
+          <circle cx="350" cy="318" r="5" fill="rgba(201,154,62,0.7)"/>
+          <circle cx="350" cy="318" r="10" fill="rgba(201,154,62,0.1)"/>
+          <text x="368" y="322" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">EUGENE</text>
+        </g>
+
+        <!-- Roseburg -->
+        <g class="city-dot" data-city="roseburg" onclick="selectCity('roseburg')">
+          <circle cx="345" cy="445" r="5" fill="rgba(201,154,62,0.7)"/>
+          <circle cx="345" cy="445" r="10" fill="rgba(201,154,62,0.1)"/>
+          <text x="363" y="449" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">ROSEBURG</text>
+        </g>
+
+        <!-- Grants Pass -->
+        <g class="city-dot" data-city="grantspass" onclick="selectCity('grantspass')">
+          <circle cx="318" cy="572" r="5" fill="rgba(201,154,62,0.7)"/>
+          <circle cx="318" cy="572" r="10" fill="rgba(201,154,62,0.1)"/>
+          <text x="335" y="576" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">GRANTS PASS</text>
+        </g>
+
+        <!-- Medford -->
+        <g class="city-dot" data-city="medford" onclick="selectCity('medford')">
+          <circle cx="308" cy="662" r="5.5" fill="rgba(196,98,45,0.75)"/>
+          <circle cx="308" cy="662" r="11" fill="rgba(196,98,45,0.12)"/>
+          <text x="325" y="666" font-family="monospace" font-size="8.5" fill="rgba(196,98,45,0.8)" letter-spacing="1">MEDFORD</text>
+        </g>
+
+        <!-- Ashland / SOU -->
+        <g class="city-dot" data-city="ashland" onclick="selectCity('ashland')">
+          <circle cx="295" cy="752" r="7" fill="#c4622d" opacity="0.9"/>
+          <circle cx="295" cy="752" r="15" fill="#c4622d" opacity="0.13"/>
+          <text x="313" y="749" font-family="monospace" font-size="9" fill="rgba(196,98,45,0.9)" letter-spacing="1.2">ASHLAND</text>
+          <text x="313" y="760" font-family="monospace" font-size="7" fill="rgba(196,98,45,0.55)" letter-spacing="1">SOU</text>
+        </g>
+
+        <!-- Distance markers -->
+        <text x="260" y="395" font-family="monospace" font-size="7" fill="rgba(201,154,62,0.4)" letter-spacing="1" text-anchor="middle">midpoint</text>
+        <line x1="290" y1="395" x2="345" y2="395" stroke="rgba(201,154,62,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+
+        <!-- N arrow -->
+        <g transform="translate(55, 80)">
+          <line x1="0" y1="18" x2="0" y2="0" stroke="rgba(242,237,230,0.35)" stroke-width="1.5"/>
+          <polygon points="0,0 -4,10 4,10" fill="rgba(242,237,230,0.35)"/>
+          <text x="0" y="28" font-family="monospace" font-size="8" fill="rgba(242,237,230,0.3)" text-anchor="middle" letter-spacing="1">N</text>
+        </g>
+
+        <!-- Scale bar -->
+        <g transform="translate(55, 720)">
+          <line x1="0" y1="0" x2="50" y2="0" stroke="rgba(242,237,230,0.3)" stroke-width="1.5"/>
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="rgba(242,237,230,0.3)" stroke-width="1.5"/>
+          <line x1="50" y1="-4" x2="50" y2="4" stroke="rgba(242,237,230,0.3)" stroke-width="1.5"/>
+          <text x="25" y="14" font-family="monospace" font-size="7" fill="rgba(242,237,230,0.28)" text-anchor="middle" letter-spacing="1">~50 mi</text>
+        </g>
+      </svg>
+      <div class="map-tooltip" id="mapTooltip"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="map-sidebar fade-up fade-up-delay-1">
+      <div class="map-legend">
+        <h4>Map Legend</h4>
+        <div class="legend-item"><div class="legend-dot" style="background:#7aaabb"></div> PSU / Portland anchor</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c4622d"></div> SOU / Ashland anchor</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(201,154,62,0.7)"></div> Corridor city</div>
+        <div class="legend-item"><div class="legend-line" style="background:rgba(201,154,62,0.55)"></div> TRU transect (I-5)</div>
+        <div class="legend-item"><div class="legend-line" style="background:rgba(122,140,110,0.5); border-top: 1px dashed rgba(122,140,110,0.5); height:0"></div> Cascade divide</div>
+      </div>
+
+      <div class="map-city-list" id="cityList">
+        <div class="city-list-item active" data-city="portland" onclick="selectCity('portland')">
+          <div class="cli-dot" style="background:#7aaabb"></div>
+          <div><div class="cli-name">Portland</div><div class="cli-sub">PSU · Urban anchor</div></div>
+        </div>
+        <div class="city-list-item" data-city="salem" onclick="selectCity('salem')">
+          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+          <div><div class="cli-name">Salem</div><div class="cli-sub">State capital · Mid-valley</div></div>
+        </div>
+        <div class="city-list-item" data-city="eugene" onclick="selectCity('eugene')">
+          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+          <div><div class="cli-name">Eugene</div><div class="cli-sub">Southern Willamette</div></div>
+        </div>
+        <div class="city-list-item" data-city="roseburg" onclick="selectCity('roseburg')">
+          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+          <div><div class="cli-name">Roseburg</div><div class="cli-sub">Douglas County · Timber economy</div></div>
+        </div>
+        <div class="city-list-item" data-city="grantspass" onclick="selectCity('grantspass')">
+          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+          <div><div class="cli-name">Grants Pass</div><div class="cli-sub">Rogue River corridor</div></div>
+        </div>
+        <div class="city-list-item" data-city="medford" onclick="selectCity('medford')">
+          <div class="cli-dot" style="background:rgba(196,98,45,0.8)"></div>
+          <div><div class="cli-name">Medford</div><div class="cli-sub">Rogue Valley hub</div></div>
+        </div>
+        <div class="city-list-item" data-city="ashland" onclick="selectCity('ashland')">
+          <div class="cli-dot" style="background:#c4622d"></div>
+          <div><div class="cli-name">Ashland</div><div class="cli-sub">SOU · Rural anchor</div></div>
+        </div>
+      </div>
+
+      <div class="map-info-panel" id="infoPanel">
+        <span class="info-tag">PSU · Urban Anchor</span>
+        <h4>Portland</h4>
+        <p>Oregon's largest city and northern anchor of the TRU transect. Portland State University leads urban climate research — tracking heat islands, air quality, and the future conditions Ashland is already living through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMIT -->
+<section class="submit-section" id="submit">
+  <div class="submit-left">
+    <h2>Share your<br /><em>project or story.</em></h2>
+    <p>TRU Oregon is built on community knowledge. If you're working on something related to water, fire, climate adaptation, or resilience anywhere along the Ashland–Portland transect, we want to feature it.</p>
+    <ul class="submit-steps">
+      <li><span class="step-num">01</span> Fill out our community project form with your project details and location.</li>
+      <li><span class="step-num">02</span> Our SOU or PSU team reviews submissions and reaches out to learn more.</li>
+      <li><span class="step-num">03</span> Your project gets featured on TRU Oregon and connected to similar work across the corridor.</li>
+      <li><span class="step-num">04</span> All data lives in a shared Google Sheet — open, accessible, community-owned.</li>
+    </ul>
+    <a class="btn-gold" href="https://docs.google.com/forms" target="_blank" rel="noopener">Submit Your Project →</a>
+  </div>
+  <div class="submit-right">
+    <h3>We're collecting projects on:</h3>
+    <h4>Issue Area</h4>
+    <div class="categories" style="margin-bottom:1.5rem;">
+      <span class="cat-badge active">Water</span>
+      <span class="cat-badge">Wildfire &amp; Smoke</span>
+      <span class="cat-badge">Heat &amp; Drought</span>
+      <span class="cat-badge">Compounding Hazards</span>
+      <span class="cat-badge">Community Resilience</span>
+      <span class="cat-badge">Equity &amp; Access</span>
+      <span class="cat-badge">Biodiversity</span>
+      <span class="cat-badge">Agriculture</span>
+      <span class="cat-badge">Emergency Response</span>
+      <span class="cat-badge">Policy &amp; Governance</span>
+    </div>
+    <h4>Type of Work</h4>
+    <div class="categories">
+      <span class="cat-badge">Storytelling</span>
+      <span class="cat-badge">Place-Based Planning / Co-Production of Knowledge</span>
+      <span class="cat-badge">Data Inventory / Gap</span>
+      <span class="cat-badge">Public / Stakeholder Engagement with Science</span>
+      <span class="cat-badge">Environmental Justice</span>
+      <span class="cat-badge">Restoration Economy</span>
+    </div>
+    <p class="data-note">Project submissions are stored in a linked Google Sheet. All data is community-owned and openly accessible. Google Forms — no account required.</p>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-text fade-up">
+    <h3>Stay on the transect.</h3>
+    <p>Get project updates and climate insights from the TRU corridor — SOU to PSU.</p>
+  </div>
+  <form class="newsletter-form fade-up fade-up-delay-1" onsubmit="handleSubscribe(event)">
+    <input type="email" placeholder="your@email.com" required aria-label="Email address"/>
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">TRU Oregon</div>
+    <div class="footer-logo-sub">Transect for Rural to Urban Oregon</div>
+    <p class="footer-tagline">A climate knowledge corridor connecting Southern Oregon University in Ashland with Portland State University — 280 miles of shared future.</p>
+    <div class="footer-uni-row">
+      <span class="footer-uni">Southern Oregon University</span>
+      <span class="footer-uni">Portland State University</span>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Issues</h4>
+    <ul>
+      <li><a href="#">Water</a></li>
+      <li><a href="#">Fire</a></li>
+      <li><a href="#">Compounding Hazards</a></li>
+      <li><a href="#">Climate Change</a></li>
+      <li><a href="#">Equity</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Community</h4>
+    <ul>
+      <li><a href="#submit">Submit a Project</a></li>
+      <li><a href="#corridor-map">Project Map</a></li>
+      <li><a href="team.html">Contributors</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Open Data</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>About</h4>
+    <ul>
+      <li><a href="#">Our Mission</a></li>
+      <li><a href="https://sou.edu" target="_blank">SOU</a></li>
+      <li><a href="https://pdx.edu" target="_blank">PSU</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 TRU Oregon — Transect for Rural to Urban Oregon · SOU &amp; PSU</span>
+  <span>Built for community · Hosted on GitHub Pages</span>
+</div>
+
+<script>
+  // Fade-up on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  setTimeout(() => {
+    document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible'));
+  }, 80);
+
+  // Category badge toggle
+  document.querySelectorAll('.cat-badge').forEach(b => {
+    b.addEventListener('click', () => b.classList.toggle('active'));
+  });
+
+  // Newsletter
+  function handleSubscribe(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Thank you!';
+    btn.style.background = 'var(--clay)';
+  }
+
+  // City data
+  const cities = {
+    portland: {
+      tag: 'PSU · Urban Anchor',
+      name: 'Portland',
+      desc: "Oregon's largest city and northern anchor of the TRU transect. Portland State University leads urban climate research — tracking heat islands, air quality, and the future conditions Ashland is already living through."
+    },
+    salem: {
+      tag: 'State Capital · Mid-Corridor',
+      name: 'Salem',
+      desc: "Oregon's capital sits in the heart of the Willamette Valley. Salem bridges urban policy and rural agriculture, with growing exposure to heat waves, air quality degradation, and flooding from the Willamette River."
+    },
+    eugene: {
+      tag: 'Southern Willamette Valley',
+      name: 'Eugene',
+      desc: 'Eugene marks the transition from the broader Willamette Valley to the more rugged southern ranges. It\'s a bellwether for how mid-size Oregon cities will need to adapt to increasing fire smoke and water stress.'
+    },
+    roseburg: {
+      tag: 'Douglas County · Timber Transition',
+      name: 'Roseburg',
+      desc: 'Roseburg anchors Douglas County, where the timber economy is navigating climate-driven forest change. Wildfire, drought, and restoration economy questions are front and center for this mid-transect community.'
+    },
+    grantspass: {
+      tag: 'Rogue River Corridor',
+      name: 'Grants Pass',
+      desc: "Grants Pass sits along the Rogue River and faces compounding stresses: water allocation conflicts, summer heat extremes, wildfire, and an agricultural economy increasingly strained by drought and smoke."
+    },
+    medford: {
+      tag: 'Rogue Valley Hub',
+      name: 'Medford',
+      desc: "The largest city in southern Oregon, Medford is the urban center of the Rogue Valley. Its summer heat, smoke exposure, and growth pressures make it a critical node where TRU research meets real-time climate stress."
+    },
+    ashland: {
+      tag: 'SOU · Rural Anchor',
+      name: 'Ashland',
+      desc: "The southern anchor of the TRU transect and home to Southern Oregon University. Ashland is living the Oregon climate future now: declining snowpack, earlier fire seasons, drought, and compounding hazards — offering Portland a 20-year preview."
+    }
+  };
+
+  function selectCity(id) {
+    // Update city list highlight
+    document.querySelectorAll('.city-list-item').forEach(el => {
+      el.classList.toggle('active', el.dataset.city === id);
+    });
+    // Update info panel
+    const c = cities[id];
+    const panel = document.getElementById('infoPanel');
+    panel.innerHTML = `<span class="info-tag">${c.tag}</span><h4>${c.name}</h4><p>${c.desc}</p>`;
+  }
+</script>
+</body>
+</html>
+
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
