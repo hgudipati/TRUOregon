@@ -589,7 +589,7 @@
    //     permanent: false,
    //     direction: 'right',
    //     className: 'tru-tooltip',
-   //   }).addTo(map);
+      }).addTo(map);
     });
  
     // Small Leaflet attribution in corner
@@ -749,7 +749,7 @@
     <h2>The TRU Corridor</h2>
     <a href="#">Full map →</a>
   </div>
-  <p class="map-intro fade-up">The transect runs from SOU in Ashland through Medford, Grants Pass, Roseburg, Eugene, Salem, and into Portland at PSU. Click any city to learn about the climate issues and projects active in that community.</p>
+  <p class="map-intro fade-up">The transect runs from SOU in Ashland to Portland at PSU. Click any city to learn about the climate issues and projects active in that community.</p>
  
   <div class="map-layout">
     <div class="map-svg-wrap fade-up">
@@ -819,39 +819,39 @@
         </g>
  
         <!-- Salem -->
-        <g class="city-dot" data-city="salem" onclick="selectCity('salem')">
-          <circle cx="340" cy="195" r="5" fill="rgba(201,154,62,0.7)"/>
-          <circle cx="340" cy="195" r="10" fill="rgba(201,154,62,0.1)"/>
-          <text x="358" y="199" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">SALEM</text>
-        </g>
+      //  <g class="city-dot" data-city="salem" onclick="selectCity('salem')">
+      //    <circle cx="340" cy="195" r="5" fill="rgba(201,154,62,0.7)"/>
+      //    <circle cx="340" cy="195" r="10" fill="rgba(201,154,62,0.1)"/>
+      //    <text x="358" y="199" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">SALEM</text>
+      //  </g>
  
-        <!-- Eugene -->
-        <g class="city-dot" data-city="eugene" onclick="selectCity('eugene')">
-          <circle cx="350" cy="318" r="5" fill="rgba(201,154,62,0.7)"/>
-          <circle cx="350" cy="318" r="10" fill="rgba(201,154,62,0.1)"/>
-          <text x="368" y="322" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">EUGENE</text>
-        </g>
+     //   <!-- Eugene -->
+     //   <g class="city-dot" data-city="eugene" onclick="selectCity('eugene')">
+     //     <circle cx="350" cy="318" r="5" fill="rgba(201,154,62,0.7)"/>
+     //     <circle cx="350" cy="318" r="10" fill="rgba(201,154,62,0.1)"/>
+     //     <text x="368" y="322" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">EUGENE</text>
+     //   </g>
  
         <!-- Roseburg -->
-        <g class="city-dot" data-city="roseburg" onclick="selectCity('roseburg')">
-          <circle cx="345" cy="445" r="5" fill="rgba(201,154,62,0.7)"/>
-          <circle cx="345" cy="445" r="10" fill="rgba(201,154,62,0.1)"/>
-          <text x="363" y="449" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">ROSEBURG</text>
-        </g>
+     //   <g class="city-dot" data-city="roseburg" onclick="selectCity('roseburg')">
+     //     <circle cx="345" cy="445" r="5" fill="rgba(201,154,62,0.7)"/>
+    //      <circle cx="345" cy="445" r="10" fill="rgba(201,154,62,0.1)"/>
+    //      <text x="363" y="449" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">ROSEBURG</text>
+    //    </g>
  
         <!-- Grants Pass -->
-        <g class="city-dot" data-city="grantspass" onclick="selectCity('grantspass')">
-          <circle cx="318" cy="572" r="5" fill="rgba(201,154,62,0.7)"/>
-          <circle cx="318" cy="572" r="10" fill="rgba(201,154,62,0.1)"/>
-          <text x="335" y="576" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">GRANTS PASS</text>
-        </g>
+    //    <g class="city-dot" data-city="grantspass" onclick="selectCity('grantspass')">
+    //      <circle cx="318" cy="572" r="5" fill="rgba(201,154,62,0.7)"/>
+    //      <circle cx="318" cy="572" r="10" fill="rgba(201,154,62,0.1)"/>
+    //      <text x="335" y="576" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">GRANTS PASS</text>
+    //    </g>
  
         <!-- Medford -->
-        <g class="city-dot" data-city="medford" onclick="selectCity('medford')">
-          <circle cx="308" cy="662" r="5.5" fill="rgba(196,98,45,0.75)"/>
-          <circle cx="308" cy="662" r="11" fill="rgba(196,98,45,0.12)"/>
-          <text x="325" y="666" font-family="monospace" font-size="8.5" fill="rgba(196,98,45,0.8)" letter-spacing="1">MEDFORD</text>
-        </g>
+     //   <g class="city-dot" data-city="medford" onclick="selectCity('medford')">
+     //     <circle cx="308" cy="662" r="5.5" fill="rgba(196,98,45,0.75)"/>
+     //     <circle cx="308" cy="662" r="11" fill="rgba(196,98,45,0.12)"/>
+     //     <text x="325" y="666" font-family="monospace" font-size="8.5" fill="rgba(196,98,45,0.8)" letter-spacing="1">MEDFORD</text>
+     //   </g>
  
         <!-- Ashland / SOU -->
         <g class="city-dot" data-city="ashland" onclick="selectCity('ashland')">
@@ -899,26 +899,26 @@
           <div class="cli-dot" style="background:#7aaabb"></div>
           <div><div class="cli-name">Portland</div><div class="cli-sub">PSU · Urban anchor</div></div>
         </div>
-        <div class="city-list-item" data-city="salem" onclick="selectCity('salem')">
-          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-          <div><div class="cli-name">Salem</div><div class="cli-sub">State capital · Mid-valley</div></div>
-        </div>
-        <div class="city-list-item" data-city="eugene" onclick="selectCity('eugene')">
-          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-          <div><div class="cli-name">Eugene</div><div class="cli-sub">Southern Willamette</div></div>
-        </div>
-        <div class="city-list-item" data-city="roseburg" onclick="selectCity('roseburg')">
-          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-          <div><div class="cli-name">Roseburg</div><div class="cli-sub">Douglas County · Timber economy</div></div>
-        </div>
-        <div class="city-list-item" data-city="grantspass" onclick="selectCity('grantspass')">
-          <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-          <div><div class="cli-name">Grants Pass</div><div class="cli-sub">Rogue River corridor</div></div>
-        </div>
-        <div class="city-list-item" data-city="medford" onclick="selectCity('medford')">
-          <div class="cli-dot" style="background:rgba(196,98,45,0.8)"></div>
-          <div><div class="cli-name">Medford</div><div class="cli-sub">Rogue Valley hub</div></div>
-        </div>
+        //<div class="city-list-item" data-city="salem" onclick="selectCity('salem')">
+        //  <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+        //  <div><div class="cli-name">Salem</div><div class="cli-sub">State capital · Mid-valley</div></div>
+       // </div>
+       // <div class="city-list-item" data-city="eugene" onclick="selectCity('eugene')">
+       //   <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+       //   <div><div class="cli-name">Eugene</div><div class="cli-sub">Southern Willamette</div></div>
+       // </div>
+       // <div class="city-list-item" data-city="roseburg" onclick="selectCity('roseburg')">
+       //   <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+       //   <div><div class="cli-name">Roseburg</div><div class="cli-sub">Douglas County · Timber economy</div></div>
+       // </div>
+       // <div class="city-list-item" data-city="grantspass" onclick="selectCity('grantspass')">
+       //   <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
+       //   <div><div class="cli-name">Grants Pass</div><div class="cli-sub">Rogue River corridor</div></div>
+       // </div>
+       // <div class="city-list-item" data-city="medford" onclick="selectCity('medford')">
+       //   <div class="cli-dot" style="background:rgba(196,98,45,0.8)"></div>
+       //   <div><div class="cli-name">Medford</div><div class="cli-sub">Rogue Valley hub</div></div>
+      //  </div>
         <div class="city-list-item" data-city="ashland" onclick="selectCity('ashland')">
           <div class="cli-dot" style="background:#c4622d"></div>
           <div><div class="cli-name">Ashland</div><div class="cli-sub">SOU · Rural anchor</div></div>
