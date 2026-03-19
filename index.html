@@ -519,7 +519,7 @@
       attributionControl: false,
     });
  
-    // USGS National Map Topo — completely free, no API key, excellent terrain
+    // USGS Hydro Cached — shows rivers, watersheds, water bodies across Oregon
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSHydroCached/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 16,
       attribution: 'USGS National Map'
@@ -528,15 +528,15 @@
     // TRU corridor waypoints (Ashland → Medford → Grants Pass → Roseburg → Eugene → Salem → Portland)
     const corridor = [
       [42.1954, -122.7095],   // Ashland (SOU)
-      //[42.3265, -122.8756],   // Medford
-      //[42.4390, -123.3284],   // Grants Pass
-      //[43.2165, -123.3417],   // Roseburg
-      //[44.0521, -123.0868],   // Eugene
-      //[44.9429, -123.0351],   // Salem
+      [42.3265, -122.8756],   // Medford
+      [42.4390, -123.3284],   // Grants Pass
+      [43.2165, -123.3417],   // Roseburg
+      [44.0521, -123.0868],   // Eugene
+      [44.9429, -123.0351],   // Salem
       [45.5051, -122.6750],   // Portland (PSU)
     ];
     L.polyline(corridor, {
-      color: '#4d6b52',
+      color: '#c99a3e',
       weight: 3,
       opacity: 0.85,
       dashArray: '8 5',
@@ -571,30 +571,11 @@
     makeMarker([42.1954, -122.7095], '#c4622d', 'Ashland', '· SOU').addTo(map);
     makeMarker([45.5051, -122.6750], '#7aaabb', 'Portland', '· PSU').addTo(map);
  
-    // Waypoint dots (smaller)
-    //[
-    //  [[42.3265, -122.8756], 'Medford'],
-    //  [[42.4390, -123.3284], 'Grants Pass'],
-    //  [[43.2165, -123.3417], 'Roseburg'],
-    //  [[44.0521, -123.0868], 'Eugene'],
-   //   [[44.9429, -123.0351], 'Salem'],
-   // ].forEach(([latlng, name]) => {
-   //   L.circleMarker(latlng, {
-   //     radius: 4,
-   //     fillColor: '#c99a3e',
-   //     color: 'rgba(242,237,230,0.7)',
-   //     weight: 1.5,
-   //     fillOpacity: 0.9,
-   //   }).bindTooltip(name, {
-   //     permanent: false,
-   //     direction: 'right',
-   //     className: 'tru-tooltip',
-      }).addTo(map);
-    });
+    // Waypoint dots hidden until collaborators added in those cities
  
     // Small Leaflet attribution in corner
     L.control.attribution({ position: 'bottomright', prefix: false })
-      .addAttribution('USGS National Map')
+      .addAttribution('USGS National Map · Hydro')
       .addTo(map);
   })();
 </script>
@@ -604,7 +585,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    filter: saturate(0.4) brightness(0.65) sepia(0.25) contrast(1.05);
+    filter: saturate(0.5) brightness(0.55) sepia(0.4) contrast(1.1) hue-rotate(160deg);
   }
   .tru-tooltip {
     background: rgba(43,40,36,0.88) !important;
@@ -749,7 +730,7 @@
     <h2>The TRU Corridor</h2>
     <a href="#">Full map →</a>
   </div>
-  <p class="map-intro fade-up">The transect runs from SOU in Ashland to Portland at PSU. Click any city to learn about the climate issues and projects active in that community.</p>
+  <p class="map-intro fade-up">The TRU transect runs 280 miles from SOU in Ashland to PSU in Portland. Click either anchor city to learn about the climate issues and projects active there. More corridor cities will appear as collaborators join.</p>
  
   <div class="map-layout">
     <div class="map-svg-wrap fade-up">
@@ -788,15 +769,15 @@
         <path d="M90 55 L565 55 L580 110 L572 180 L565 290 L558 400 L552 510 L545 610 L390 770 L220 770 L100 670 L82 560 L72 400 L76 200 Z"
           fill="rgba(61,107,122,0.07)" stroke="rgba(61,107,122,0.3)" stroke-width="1.5"/>
  
-        //<!-- Cascade mountain range hint (west side) -->
-        //<path d="M130 55 L130 400 L145 420 L130 450 L140 500 L125 550 L135 620 L120 680 L130 770"
-        //  fill="none" stroke="rgba(122,140,110,0.2)" stroke-width="1.5" stroke-dasharray="4 6"/>
+        <!-- Cascade mountain range hint (west side) -->
+        <path d="M130 55 L130 400 L145 420 L130 450 L140 500 L125 550 L135 620 L120 680 L130 770"
+          fill="none" stroke="rgba(122,140,110,0.2)" stroke-width="1.5" stroke-dasharray="4 6"/>
  
-       // <!-- Willamette Valley label zone -->
-       // <text x="210" y="200" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.3)" letter-spacing="3" text-anchor="middle">WILLAMETTE VALLEY</text>
-       // <text x="340" y="620" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.25)" letter-spacing="2" text-anchor="middle">ROGUE VALLEY</text>
+        <!-- Willamette Valley label zone -->
+        <text x="210" y="200" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.3)" letter-spacing="3" text-anchor="middle">WILLAMETTE VALLEY</text>
+        <text x="340" y="620" font-family="monospace" font-size="8" fill="rgba(122,140,110,0.25)" letter-spacing="2" text-anchor="middle">ROGUE VALLEY</text>
  
-        <!-- TRU corridor route -->
+        <!-- I-5 / TRU corridor route -->
         <path id="corridorPath"
           d="M295 750 C 300 720 305 690 308 660 C 312 625 318 600 322 570 C 328 535 335 508 340 478 C 346 445 348 415 350 385 C 353 350 355 318 356 285 C 357 255 356 225 354 195 C 352 165 348 138 344 112 C 340 88 335 68 330 55"
           fill="none" stroke="rgba(201,154,62,0.25)" stroke-width="3"/>
@@ -818,40 +799,11 @@
           <text x="350" y="66" font-family="monospace" font-size="7" fill="rgba(122,170,187,0.55)" letter-spacing="1">PSU</text>
         </g>
  
-        <!-- Salem -->
-      //  <g class="city-dot" data-city="salem" onclick="selectCity('salem')">
-      //    <circle cx="340" cy="195" r="5" fill="rgba(201,154,62,0.7)"/>
-      //    <circle cx="340" cy="195" r="10" fill="rgba(201,154,62,0.1)"/>
-      //    <text x="358" y="199" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">SALEM</text>
-      //  </g>
- 
-     //   <!-- Eugene -->
-     //   <g class="city-dot" data-city="eugene" onclick="selectCity('eugene')">
-     //     <circle cx="350" cy="318" r="5" fill="rgba(201,154,62,0.7)"/>
-     //     <circle cx="350" cy="318" r="10" fill="rgba(201,154,62,0.1)"/>
-     //     <text x="368" y="322" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">EUGENE</text>
-     //   </g>
- 
-        <!-- Roseburg -->
-     //   <g class="city-dot" data-city="roseburg" onclick="selectCity('roseburg')">
-     //     <circle cx="345" cy="445" r="5" fill="rgba(201,154,62,0.7)"/>
-    //      <circle cx="345" cy="445" r="10" fill="rgba(201,154,62,0.1)"/>
-    //      <text x="363" y="449" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">ROSEBURG</text>
-    //    </g>
- 
-        <!-- Grants Pass -->
-    //    <g class="city-dot" data-city="grantspass" onclick="selectCity('grantspass')">
-    //      <circle cx="318" cy="572" r="5" fill="rgba(201,154,62,0.7)"/>
-    //      <circle cx="318" cy="572" r="10" fill="rgba(201,154,62,0.1)"/>
-    //      <text x="335" y="576" font-family="monospace" font-size="8.5" fill="rgba(201,154,62,0.7)" letter-spacing="1">GRANTS PASS</text>
-    //    </g>
- 
-        <!-- Medford -->
-     //   <g class="city-dot" data-city="medford" onclick="selectCity('medford')">
-     //     <circle cx="308" cy="662" r="5.5" fill="rgba(196,98,45,0.75)"/>
-     //     <circle cx="308" cy="662" r="11" fill="rgba(196,98,45,0.12)"/>
-     //     <text x="325" y="666" font-family="monospace" font-size="8.5" fill="rgba(196,98,45,0.8)" letter-spacing="1">MEDFORD</text>
-     //   </g>
+        <!-- Salem — hidden until collaborators added -->
+        <!-- Eugene — hidden until collaborators added -->
+        <!-- Roseburg — hidden until collaborators added -->
+        <!-- Grants Pass — hidden until collaborators added -->
+        <!-- Medford — hidden until collaborators added -->
  
         <!-- Ashland / SOU -->
         <g class="city-dot" data-city="ashland" onclick="selectCity('ashland')">
@@ -861,9 +813,7 @@
           <text x="313" y="760" font-family="monospace" font-size="7" fill="rgba(196,98,45,0.55)" letter-spacing="1">SOU</text>
         </g>
  
-        <!-- Distance markers -->
-        <text x="260" y="395" font-family="monospace" font-size="7" fill="rgba(201,154,62,0.4)" letter-spacing="1" text-anchor="middle">midpoint</text>
-        <line x1="290" y1="395" x2="345" y2="395" stroke="rgba(201,154,62,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+        <!-- Midpoint marker — hidden until corridor cities are added -->
  
         <!-- N arrow -->
         <g transform="translate(55, 80)">
@@ -889,9 +839,7 @@
         <h4>Map Legend</h4>
         <div class="legend-item"><div class="legend-dot" style="background:#7aaabb"></div> PSU / Portland anchor</div>
         <div class="legend-item"><div class="legend-dot" style="background:#c4622d"></div> SOU / Ashland anchor</div>
-        <div class="legend-item"><div class="legend-dot" style="background:rgba(201,154,62,0.7)"></div> Corridor city</div>
-        <div class="legend-item"><div class="legend-line" style="background:rgba(201,154,62,0.55)"></div> TRU transect (I-5)</div>
-        <div class="legend-item"><div class="legend-line" style="background:rgba(122,140,110,0.5); border-top: 1px dashed rgba(122,140,110,0.5); height:0"></div> Cascade divide</div>
+        <div class="legend-item"><div class="legend-line" style="background:rgba(201,154,62,0.55)"></div> TRU transect</div>
       </div>
  
       <div class="map-city-list" id="cityList">
@@ -899,26 +847,6 @@
           <div class="cli-dot" style="background:#7aaabb"></div>
           <div><div class="cli-name">Portland</div><div class="cli-sub">PSU · Urban anchor</div></div>
         </div>
-        //<div class="city-list-item" data-city="salem" onclick="selectCity('salem')">
-        //  <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-        //  <div><div class="cli-name">Salem</div><div class="cli-sub">State capital · Mid-valley</div></div>
-       // </div>
-       // <div class="city-list-item" data-city="eugene" onclick="selectCity('eugene')">
-       //   <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-       //   <div><div class="cli-name">Eugene</div><div class="cli-sub">Southern Willamette</div></div>
-       // </div>
-       // <div class="city-list-item" data-city="roseburg" onclick="selectCity('roseburg')">
-       //   <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-       //   <div><div class="cli-name">Roseburg</div><div class="cli-sub">Douglas County · Timber economy</div></div>
-       // </div>
-       // <div class="city-list-item" data-city="grantspass" onclick="selectCity('grantspass')">
-       //   <div class="cli-dot" style="background:rgba(201,154,62,0.8)"></div>
-       //   <div><div class="cli-name">Grants Pass</div><div class="cli-sub">Rogue River corridor</div></div>
-       // </div>
-       // <div class="city-list-item" data-city="medford" onclick="selectCity('medford')">
-       //   <div class="cli-dot" style="background:rgba(196,98,45,0.8)"></div>
-       //   <div><div class="cli-name">Medford</div><div class="cli-sub">Rogue Valley hub</div></div>
-      //  </div>
         <div class="city-list-item" data-city="ashland" onclick="selectCity('ashland')">
           <div class="cli-dot" style="background:#c4622d"></div>
           <div><div class="cli-name">Ashland</div><div class="cli-sub">SOU · Rural anchor</div></div>
@@ -1184,13 +1112,13 @@
  
   // ── CITY MAP ──────────────────────────────────────────────────────────────
   const cities = {
-    portland:   { tag: 'PSU · Urban Anchor',             name: 'Portland',    desc: "Oregon's largest city and northern anchor of the TRU transect. Portland State University leads urban climate research — tracking heat, forest health, and water quality." },
-    //salem:      { tag: 'State Capital · Mid-Corridor',   name: 'Salem',       desc: "Oregon's capital sits in the heart of the Willamette Valley. Salem bridges urban policy and rural agriculture, with growing exposure to heat waves, air quality degradation, and flooding from the Willamette River." },
-    //eugene:     { tag: 'Southern Willamette Valley',     name: 'Eugene',      desc: "Eugene marks the transition from the broader Willamette Valley to the more rugged southern ranges. It's a bellwether for how mid-size Oregon cities will need to adapt to increasing fire smoke and water stress." },
-    //roseburg:   { tag: 'Douglas County · Timber Transition', name: 'Roseburg', desc: 'Roseburg anchors Douglas County, where the timber economy is navigating climate-driven forest change. Wildfire, drought, and restoration economy questions are front and center for this mid-transect community.' },
-    //grantspass: { tag: 'Rogue River Corridor',           name: 'Grants Pass', desc: "Grants Pass sits along the Rogue River and faces compounding stresses: water allocation conflicts, summer heat extremes, wildfire, and an agricultural economy increasingly strained by drought and smoke." },
-    //medford:    { tag: 'Rogue Valley Hub',               name: 'Medford',     desc: "The largest city in southern Oregon, Medford is the urban center of the Rogue Valley. Its summer heat, smoke exposure, and growth pressures make it a critical node where TRU research meets real-time climate stress." },
-    ashland:    { tag: 'SOU · Rural Anchor',             name: 'Ashland',     desc: "The southern anchor of the TRU transect and home to Southern Oregon University. Ashland is living the Oregon climate future: declining snowpack, earlier fire seasons, drought, and compounding hazards ." }
+    portland:   { tag: 'PSU · Urban Anchor',             name: 'Portland',    desc: "Oregon's largest city and northern anchor of the TRU transect. Portland State University leads urban climate research — tracking heat islands, air quality, and the future conditions Ashland is already living through." },
+    salem:      { tag: 'State Capital · Mid-Corridor',   name: 'Salem',       desc: "Oregon's capital sits in the heart of the Willamette Valley. Salem bridges urban policy and rural agriculture, with growing exposure to heat waves, air quality degradation, and flooding from the Willamette River." },
+    eugene:     { tag: 'Southern Willamette Valley',     name: 'Eugene',      desc: "Eugene marks the transition from the broader Willamette Valley to the more rugged southern ranges. It's a bellwether for how mid-size Oregon cities will need to adapt to increasing fire smoke and water stress." },
+    roseburg:   { tag: 'Douglas County · Timber Transition', name: 'Roseburg', desc: 'Roseburg anchors Douglas County, where the timber economy is navigating climate-driven forest change. Wildfire, drought, and restoration economy questions are front and center for this mid-transect community.' },
+    grantspass: { tag: 'Rogue River Corridor',           name: 'Grants Pass', desc: "Grants Pass sits along the Rogue River and faces compounding stresses: water allocation conflicts, summer heat extremes, wildfire, and an agricultural economy increasingly strained by drought and smoke." },
+    medford:    { tag: 'Rogue Valley Hub',               name: 'Medford',     desc: "The largest city in southern Oregon, Medford is the urban center of the Rogue Valley. Its summer heat, smoke exposure, and growth pressures make it a critical node where TRU research meets real-time climate stress." },
+    ashland:    { tag: 'SOU · Rural Anchor',             name: 'Ashland',     desc: "The southern anchor of the TRU transect and home to Southern Oregon University. Ashland is living the Oregon climate future now: declining snowpack, earlier fire seasons, drought, and compounding hazards — offering Portland a 20-year preview." }
   };
  
   function selectCity(id) {
